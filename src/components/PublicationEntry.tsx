@@ -1,3 +1,4 @@
+import { EntityText } from "@/components/EntityText";
 import { site } from "@/content/site";
 
 export function PublicationEntry() {
@@ -5,14 +6,21 @@ export function PublicationEntry() {
   return (
     <div className="publication-list">
       <article className="publication-entry">
-        <div><h3>{article.title}</h3><p className="citation"><em>{article.citation}</em></p></div>
-        <p className="publication-date">{article.date}</p>
-        <p className="publication-summary">{article.summary}</p>
+        <h3>{article.title}</h3>
+        <p className="publication-authors"><strong>{article.author}</strong> {article.authorNote}</p>
+        <p className="publication-venue"><EntityText text={article.venue} /></p>
         <div className="publication-links">
-          {article.links.map((link) => <span className="todo-link" key={link.label}>{link.label} · {link.todo}</span>)}
+          {article.links.map((link) => link.href ? (
+            <a className="text-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>{link.label}</a>
+          ) : (
+            <span className="todo-inline-link" title={link.todo} key={link.label}>{link.label}<sup>{site.ui.todoMarker}</sup></span>
+          ))}
         </div>
       </article>
-      <article className="patent-entry"><p className="caption">{patent.label}</p><h3>{patent.title}</h3><p>{patent.role}</p></article>
+      <article className="patent-entry">
+        <p className="caption">{patent.label}</p>
+        <h3>{patent.title}</h3>
+      </article>
     </div>
   );
 }

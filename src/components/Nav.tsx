@@ -22,11 +22,11 @@ export function Nav() {
 
   return (
     <header className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
-      <nav className="nav-inner" aria-label="Primary navigation">
+      <nav className="nav-inner" aria-label={site.ui.primaryNavigation}>
         <a className="nav-name" href="#top" onClick={() => setOpen(false)}>{site.identity.name}</a>
         <div className={`nav-links${open ? " nav-links-open" : ""}`}>
-          {site.navigation.map((item, index) => (
-            <a key={item.href} href={item.href} style={{ "--menu-delay": `${index * 80}ms` } as React.CSSProperties} onClick={() => setOpen(false)}>
+          {site.navigation.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
               {item.label}
             </a>
           ))}

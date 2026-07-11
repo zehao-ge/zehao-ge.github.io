@@ -45,7 +45,7 @@ The fully static export is written to `out/`. It can be served from any static h
 2. Configure a GitHub Actions workflow to run `npm ci` and `npm run build`.
 3. Upload the `out/` directory with `actions/upload-pages-artifact`.
 4. Deploy it with `actions/deploy-pages`.
-5. If deploying under a repository subpath, add matching `basePath` and `assetPrefix` values to `next.config.ts` before building.
+5. This repository is served from the domain root. Do not add `basePath` or `assetPrefix`.
 6. Replace the canonical URL TODO in `src/content/site.ts`.
 
 ## Deploy to Cloudflare Pages
@@ -54,11 +54,11 @@ Use `npm run build` as the build command and `out` as the output directory.
 
 ## Required replacements
 
-- Replace the hero placeholder with a real photograph at `public/media/hero.webp`.
-- Replace `public/cv/GeZehao_CV.pdf` with the final CV.
+- Add the portrait and project images listed in `public/media/README.md`.
+- Replace `public/cv/GeZehao_CV.pdf` with the final public CV. It must omit date of birth and phone number and state the degree exactly as "Bachelor's degree in Product Design" to match the site.
 - Add the publication PDF URL.
 - Add the publication publisher URL.
 - Add GitHub, Google Scholar, and LinkedIn URLs.
 - Replace the canonical production URL.
 
-The current CV is an intentional placeholder. The hero does not use stock or AI-generated photography.
+The current CV is an intentional placeholder. Missing images render neutral placeholders; the site does not use stock photography, hotlinked imagery, or AI-generated photographs of real hardware.

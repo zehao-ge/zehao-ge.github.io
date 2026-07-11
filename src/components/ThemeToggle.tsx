@@ -12,8 +12,8 @@ export function ThemeToggle() {
 
   return (
     <button className="theme-toggle" type="button" onClick={toggle} aria-label={site.ui.toggleTheme}>
-      <span className="theme-glyph theme-glyph-light" aria-hidden="true">◐</span>
-      <span className="theme-glyph theme-glyph-dark" aria-hidden="true">☀</span>
+      <span className="theme-glyph theme-glyph-light" aria-hidden="true">{site.ui.themeGlyphLight}</span>
+      <span className="theme-glyph theme-glyph-dark" aria-hidden="true">{site.ui.themeGlyphDark}</span>
     </button>
   );
 }

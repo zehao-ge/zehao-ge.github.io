@@ -27,12 +27,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const sameAs = site.contact.profiles.map((profile) => profile.href || profile.todo);
+  const sameAs = site.header.links.filter((profile) => profile.href.startsWith("http")).map((profile) => profile.href);
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.identity.name,
     affiliation: { "@type": "Organization", name: site.identity.affiliation },
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: site.identity.alumniOf,
+      description: site.identity.degree,
+    },
+    description: site.identity.description,
     email: `mailto:${site.identity.email}`,
     sameAs,
   };
@@ -41,9 +47,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "ScholarlyArticle",
     headline: site.publications.article.title,
     author: { "@type": "Person", name: site.identity.name },
-    isPartOf: site.publications.article.citation,
-    datePublished: site.publications.article.date,
-    description: site.publications.article.summary,
+    isPartOf: site.publications.article.venue,
+    datePublished: site.publications.article.datePublished,
   };
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
