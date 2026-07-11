@@ -12,8 +12,10 @@ export function ThemeToggle() {
 
   return (
     <button className="theme-toggle" type="button" onClick={toggle} aria-label={site.ui.toggleTheme}>
-      <span className="theme-glyph theme-glyph-light" aria-hidden="true">{site.ui.themeGlyphLight}</span>
-      <span className="theme-glyph theme-glyph-dark" aria-hidden="true">{site.ui.themeGlyphDark}</span>
+      <svg className="theme-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M12 4.5a7.5 7.5 0 0 0 0 15Z" fill="currentColor" />
+      </svg>
     </button>
   );
 }

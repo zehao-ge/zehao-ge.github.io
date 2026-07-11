@@ -11,20 +11,32 @@ export function ProfileHeader() {
   return (
     <section className="profile-header section" aria-labelledby="profile-title">
       <div className="content-width profile-grid">
-        <div className="portrait-frame">
-          {portraitExists ? (
-            <Image src={portrait.path} alt={portrait.alt} width={portrait.width} height={portrait.height} priority />
-          ) : (
-            <div className="portrait-placeholder" role="img" aria-label={site.ui.portraitPlaceholder}>
-              <span>{site.ui.portraitPlaceholder}</span>
-            </div>
-          )}
+        <div className="profile-aside">
+          <div className="portrait-frame">
+            {portraitExists ? (
+              <Image src={portrait.path} alt={portrait.alt} width={portrait.width} height={portrait.height} priority />
+            ) : (
+              <div className="portrait-placeholder" role="img" aria-label={site.ui.portraitPlaceholder}>
+                <span>{site.ui.portraitPlaceholder}</span>
+              </div>
+            )}
+          </div>
+          <InlineLinkRow links={site.header.links} showTodoMarker={false} />
         </div>
         <div className="profile-copy">
-          <h1 id="profile-title">{site.header.heading}</h1>
+          <h1 id="profile-title">
+            <span className="profile-name-unit">{site.header.heading.latin}</span>{" "}
+            <span className="profile-name-unit">{site.header.heading.chinese}</span>
+          </h1>
           {site.header.bio.map((paragraph) => <p className="profile-bio" key={paragraph}><EntityText text={paragraph} /></p>)}
-          <p className="profile-interests">{site.header.interests}</p>
-          <InlineLinkRow links={site.header.links} />
+          <div className="profile-statements">
+            {site.header.statements.map((statement) => (
+              <p key={statement.label}>
+                <strong>{statement.label}</strong>{" "}<EntityText text={statement.text} />
+              </p>
+            ))}
+          </div>
+          <p className="profile-email">{site.header.emailDisplay}</p>
         </div>
       </div>
     </section>

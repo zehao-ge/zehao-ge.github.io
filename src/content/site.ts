@@ -23,10 +23,18 @@ export type WorkDetailFact = {
   label: string;
   value: string;
 };
+export type WorkDetailVideo = {
+  embedUrl: string;
+  title: string;
+  linkLabel: string;
+  linkHref: string;
+};
 export type WorkDetail = {
   body?: readonly string[];
   facts?: readonly WorkDetailFact[];
   images: readonly WorkDetailImage[];
+  video?: WorkDetailVideo;
+  relatedLinks?: readonly LinkItem[];
   externalLinks?: readonly LinkItem[];
   todo?: string;
   status?: string;
@@ -91,20 +99,6 @@ const detailImage = (
   attribution,
 });
 
-const coverDetailImage = (
-  file: string,
-  alt: string,
-  caption?: string,
-  attribution?: string,
-): WorkDetailImage => ({
-  path: `/media/work/${file}.webp`,
-  alt,
-  width: 1120,
-  height: 630,
-  caption,
-  attribution,
-});
-
 const detailInPreparation = "Detail page in preparation.";
 
 export const site = {
@@ -135,8 +129,6 @@ export const site = {
     lightMode: "Use light mode",
     darkMode: "Use dark mode",
     toggleTheme: "Toggle color theme",
-    themeGlyphLight: "◐",
-    themeGlyphDark: "☀",
     cv: "CV",
     showMore: "Show more ›",
     showLess: "Show less",
@@ -172,45 +164,62 @@ export const site = {
     { label: "Contact", href: "/#contact" },
   ] satisfies readonly NavItem[],
   entities: [
-    { label: "M.S. in Technology Innovation (Robotics)", href: "", todo: "TODO: verify https://gix.uw.edu" },
-    { label: "South China University of Technology", href: "", todo: "TODO: add SCUT URL" },
-    { label: "Tsinghua University", href: "", todo: "TODO: add Tsinghua University URL" },
-    { label: "Future Laboratory", href: "", todo: "TODO: add Future Laboratory URL" },
+    { label: "M.S. in Technology Innovation (Robotics)", href: "https://gix.uw.edu/graduate/msti/robotics-track" },
+    { label: "South China University of Technology", href: "https://www.scut.edu.cn/en/main.htm" },
+    { label: "Tsinghua University", href: "https://www.tsinghua.edu.cn/en/" },
+    { label: "Future Laboratory", href: "https://thfl.tsinghua.edu.cn/en/" },
     { label: "University of Washington", href: "https://www.washington.edu" },
-    { label: "Zhejiang University", href: "", todo: "TODO: add Zhejiang University URL" },
+    { label: "Zhejiang University", href: "https://www.zju.edu.cn/english/" },
     { label: "Xiaomi Skynomad", href: "https://www.xiaomiev.com/skynomad" },
     { label: "Xiaomi EV", href: "https://www.xiaomiev.com" },
-    { label: "Midea Group", href: "", todo: "TODO: add Midea Group URL" },
-    { label: "Siemens China", href: "", todo: "TODO: add Siemens China URL" },
-    { label: "iF Design Award", href: "", todo: "TODO: add iF Design Award URL" },
-    { label: "SO-ARM 101", href: "", todo: "TODO: add SO-ARM 101 URL" },
-    { label: "OpenArm", href: "", todo: "TODO: add OpenArm URL" },
-    { label: "LeRobot", href: "", todo: "TODO: add LeRobot URL" },
-    { label: "SCUT", href: "", todo: "TODO: add SCUT URL" },
+    { label: "Midea Group", href: "https://www.midea.com.cn/en" },
+    { label: "Siemens China", href: "https://www.siemens.com/en-us/company/" },
+    { label: "iF Design Award", href: "https://ifdesign.com/en" },
+    { label: "SO-ARM 101", href: "https://github.com/TheRobotStudio/SO-ARM100" },
+    { label: "OpenArm", href: "https://openarm.dev/" },
+    { label: "LeRobot", href: "https://github.com/huggingface/lerobot" },
+    { label: "SCUT", href: "https://www.scut.edu.cn/en/main.htm" },
   ] satisfies readonly EntityLink[],
   header: {
     portrait: {
       path: "/media/portrait.webp",
       publicPath: "public/media/portrait.webp",
-      alt: "Portrait of Ge Zehao",
+      alt: "Portrait of Zehao Ge",
       width: 400,
       height: 400,
       recommendedSize: "400 × 400",
-      source: "new photo (owner)",
+      source: "owner-supplied photo: ~/Desktop/personal/d8d7a0edfdab8a9ba60dd85e03750d3e.jpg",
     },
-    heading: "Zehao (Kai) Ge 「葛泽昊」",
+    heading: {
+      latin: "Zehao (Kai) Ge",
+      chinese: "「葛泽昊」",
+    },
     bio: [
-      "I go by Kai. For four years I have been building new ways for people to control machines — sEMG input bands, spatial interfaces, steering wheels and cockpit systems for production cars. Now I build them for robots. I am a research assistant at the Future Laboratory, Tsinghua University, where I design foot-operated locomotion interfaces for omnidirectional mobile bases: when both hands are occupied teleoperating dual arms, how should the operator drive the robot's body? I study how interface design shapes demonstration quality — and the policies learned from it.",
-      "Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces. I received my Bachelor's degree in Product Design from South China University of Technology. In fall 2026 I will join the M.S. in Technology Innovation (Robotics) program at the University of Washington.",
+      "I go by Kai. I am a research assistant at the Future Laboratory, Tsinghua University, working on embodied AI and human–robot interaction.",
+      "Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces, shipping HMI on the Skynomad and YU7 platforms.",
+      "I received my bachelor's degree in Product Design from South China University of Technology. In fall 2026 I will join the M.S. in Technology Innovation (Robotics) at the University of Washington.",
     ],
-    interests: "Embodied AI · Robot Learning · Human–Robot Interaction · Mobile Manipulation",
+    statements: [
+      {
+        label: "Through-line:",
+        text: "For four years I have been building new ways for people to control machines — sEMG input bands, spatial interfaces, steering wheels and cockpit systems for production cars. Now I build them for robots.",
+      },
+      {
+        label: "Research Interest:",
+        text: "Embodied AI, robot learning, human–robot interaction, mobile manipulation.",
+      },
+      {
+        label: "Research Question:",
+        text: "When both hands are occupied teleoperating dual arms, how should the operator drive the robot's body? I study how interface design shapes demonstration quality — and the policies learned from it.",
+      },
+    ],
+    emailDisplay: "Email: thehowge88 [AT] gmail.com",
     links: [
       { label: "CV", href: "/cv/GeZehao_CV.pdf" },
       { label: "Email", href: "mailto:thehowge88@gmail.com" },
-      { label: "Google Scholar", href: "", todo: "TODO: add Google Scholar URL" },
-      { label: "GitHub", href: "", todo: "TODO: add GitHub URL" },
-      { label: "LinkedIn", href: "", todo: "TODO: add LinkedIn URL" },
-      { label: "Design Portfolio", href: "https://gezehao.webflow.io/" },
+      { label: "Scholar", href: "", todo: "TODO: add Google Scholar URL" },
+      { label: "GitHub", href: "https://github.com/zehao-ge" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
     ] satisfies readonly LinkItem[],
   },
   news: {
@@ -245,13 +254,10 @@ export const site = {
             imageCaption: "Concept visualization",
             detail: {
               images: [
-                coverDetailImage(
-                  "foot-interface",
-                  "Foot-operated locomotion interface concept visualization",
-                  "Concept visualization",
-                ),
+                detailImage("foot-interface", "01", "Concept visualization of a foot-operated interface controlling a mobile dual-arm robot", "Concept visualization", 1600, 901),
+                detailImage("foot-interface", "02", "Concept visualization of foot and arm interfaces controlling a humanoid robot", "Concept visualization", 1600, 901),
+                detailImage("foot-interface", "03", "Concept visualization showing the degree-of-freedom mapping for the foot interface", "Concept visualization", 1600, 900),
               ],
-              todo: "TODO: content pending",
             },
             // replace with prototype photos in Sept 2026, then remove caption.
           },
@@ -327,8 +333,9 @@ export const site = {
               "A capstone on spatial-computing input interfaces for 3D transportation scenarios — how operators express intent in volumetric space.",
             image: workImage("spatial-capstone.webp", "Spatial interaction input capstone", "owner (no public page)"),
             detail: {
+              body: ["A concept project on spatial-computing input interfaces for 3D transportation systems."],
               images: [],
-              todo: "TODO: content pending",
+              relatedLinks: [{ label: "Related work: Neuroware — sEMG Spatial Interaction Input Device ›", href: "/work/neuroware" }],
             },
           },
         ],
@@ -345,7 +352,7 @@ export const site = {
             status: "Built",
             description:
               "A complete pipeline on SO-ARM 101, OpenArm, a mecanum-wheel mobile base, and LeRobot: calibration, leader–follower teleoperation, demonstration collection, ACT policy training, real-robot evaluation.",
-            image: workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "new photo of rig (owner)"),
+            image: workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "~/Desktop/Tsinghua/270059ea35579b4d5a2e0f0913366631.jpg"),
             detail: {
               images: [],
               todo: "TODO: content pending",
@@ -361,8 +368,14 @@ export const site = {
               "Data curation and classification for an industrial-design foundation model, with foundational study of CNNs and Transformers.",
             image: workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "old site /untitled/xiaomi-ai"),
             detail: {
-              images: [],
-              status: detailInPreparation,
+              body: [
+                "During my internship at Xiaomi Automotive, I also contributed to the development of a generative visual model for internal use by the industrial design department.",
+                "My responsibilities included: 1. Data preparation (collecting, organizing, labeling, and cleaning image datasets), data augmentation, and splitting data for training. 2. Collaborating with the software engineering team to select the generative model architecture (VAE), conducting initial training, fine-tuning, and optimizing loss functions. 3. Subjectively evaluating the novelty and practicality of designs as a designer, and developing an automatic scoring system based on factors such as aerodynamics and production costs.",
+              ],
+              images: [
+                detailImage("xiaomi-ai", "01", "Front and rear three-quarter vehicle styling outputs from the Xiaomi generative AI project", "Vehicle styling outputs", 1600, 623),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/xiaomi-ai" }],
             },
           },
           {
@@ -398,11 +411,16 @@ export const site = {
             status: "Shipped",
             description:
               "Smart-cockpit engineering for the Xiaomi Skynomad, released 2026 — translating styling and HMI concepts into mass-producible, human-centered structures.",
-            image: workImage("skynomad.webp", "Xiaomi Skynomad cockpit interior", "xiaomiev.com/skynomad (credit Image: Xiaomi)"),
+            image: workImage("skynomad.webp", "Xiaomi Skynomad cockpit interior", "~/Desktop/personal/website/78ceda912861c5263ab8a3bb08188de4.jpg (credit Image: Xiaomi)"),
             imageCaption: "Image: Xiaomi",
             detail: {
               images: [],
-              status: detailInPreparation,
+              video: {
+                embedUrl: "https://www.youtube-nocookie.com/embed/95y0YSBQsz4",
+                title: "Skynomad smart cockpit video",
+                linkLabel: "Watch on YouTube ›",
+                linkHref: "https://www.youtube.com/shorts/95y0YSBQsz4",
+              },
             },
           },
           {
@@ -414,11 +432,19 @@ export const site = {
             status: "Shipped",
             description:
               "Collaborated with engineering teams and suppliers to bring the HyperVision panoramic cockpit display into mass production.",
-            image: workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "xiaomiev.com/yu7 (credit Image: Xiaomi)"),
+            image: workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "~/Desktop/personal/website/512707016_1185639896941152_6825790499007650197_n.jpg (credit Image: Xiaomi)"),
             imageCaption: "Image: Xiaomi",
             detail: {
-              images: [],
-              status: detailInPreparation,
+              images: [
+                detailImage("yu7-hypervision", "01", "Xiaomi HyperVision panoramic display across the YU7 cockpit", "Image: Xiaomi", 1270, 540),
+                detailImage("yu7-hypervision", "02", "Xiaomi HyperVision panoramic display information-module layouts", "Image: Xiaomi", 1270, 540),
+              ],
+              video: {
+                embedUrl: "https://www.youtube-nocookie.com/embed/lFuceWZUOp4",
+                title: "Xiaomi YU7 HyperVision panoramic display video",
+                linkLabel: "Watch on YouTube ›",
+                linkHref: "https://www.youtube.com/watch?v=lFuceWZUOp4",
+              },
             },
           },
           {
@@ -429,7 +455,7 @@ export const site = {
             context: "Industry",
             status: "Shipped",
             description: "Engineering delivery of the functional front air-duct system on the SU7 Ultra.",
-            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "xiaomiev.com/ultra (credit Image: Xiaomi)"),
+            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "~/Desktop/personal/website/xiaomi-su7-ultra-prototype_100937238.jpg (credit Image: Xiaomi)"),
             imageCaption: "Image: Xiaomi — SU7 Ultra. I engineered the functional front air-duct system.",
             detail: {
               images: [],
@@ -531,8 +557,8 @@ export const site = {
       venue: "Frontiers in Artificial Intelligence and Applications (FAIA), Vol. 405, 2025 — EI Compendex indexed",
       datePublished: "2025-04",
       links: [
-        { label: "pdf", href: "", todo: "TODO: add publication PDF URL" },
-        { label: "publisher", href: "", todo: "TODO: add publication publisher URL" },
+        { label: "pdf", href: "https://journals.sagepub.com/doi/pdf/10.3233/FAIA250343?download=true" },
+        { label: "publisher", href: "https://journals.sagepub.com/doi/10.3233/FAIA250343" },
       ],
     },
     patent: {
@@ -638,32 +664,15 @@ export const site = {
     heading: "Get in touch",
     lede: "Open to research collaborations and graduate opportunities in embodied AI and human–robot interaction.",
     profiles: [
-      { label: "GitHub", href: "", todo: "TODO: add GitHub URL" },
+      { label: "GitHub", href: "https://github.com/zehao-ge" },
       { label: "Google Scholar", href: "", todo: "TODO: add Google Scholar URL" },
-      { label: "LinkedIn", href: "", todo: "TODO: add LinkedIn URL" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
     ] satisfies readonly LinkItem[],
     footer: "© 2026 Zehao Ge · Last updated July 2026",
   },
   todos: [
     "TODO: add exact month for the 2026 University of Washington admission news item",
-    "TODO: verify the M.S. in Technology Innovation (Robotics) URL: https://gix.uw.edu",
-    "TODO: add Future Laboratory URL",
-    "TODO: add Tsinghua University URL",
-    "TODO: add SCUT URL",
-    "TODO: add Zhejiang University URL",
-    "TODO: add Midea Group URL",
-    "TODO: add Siemens China URL",
-    "TODO: add LeRobot URL",
-    "TODO: add SO-ARM 101 URL",
-    "TODO: add OpenArm URL",
-    "TODO: add iF Design Award URL",
-    "TODO: add publication PDF URL",
-    "TODO: add publication publisher URL",
-    "TODO: add GitHub URL",
     "TODO: add Google Scholar URL",
-    "TODO: add LinkedIn URL",
-    "TODO: add Xiaomi YU7 official page",
-    "TODO: add Xiaomi SU7 Ultra official page",
     "TODO(owner): verify the division of work between Skynomad and YU9, and that naming the YU9 program publicly is acceptable",
     "TODO: replace public/cv/GeZehao_CV.pdf with a public CV that omits date of birth and phone number and states the degree exactly as Bachelor's degree in Product Design",
   ],

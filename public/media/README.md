@@ -4,18 +4,18 @@ Place owner-supplied WebP files at the exact paths below. Keep every file at or 
 
 | Path | Recommended size | Source |
 |---|---:|---|
-| `public/media/portrait.webp` | 400 × 400 | New photo supplied by owner |
+| `public/media/portrait.webp` | 400 × 400 | `~/Desktop/personal/d8d7a0edfdab8a9ba60dd85e03750d3e.jpg` |
 | `public/media/work/foot-interface.webp` | 1120 × 630 | `~/Desktop/GPT images/Frame 3.png` |
 | `public/media/work/folding-wheel.webp` | 1120 × 630 | `~/Desktop/Frame 121.png` |
 | `public/media/work/neuroware.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/neuroware` |
 | `public/media/work/neuro-ui.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/neuro-ui` |
 | `public/media/work/spatial-capstone.webp` | 1120 × 630 | Owner supplied; no public page |
-| `public/media/work/pipeline.webp` | 1120 × 630 | New rig photograph supplied by owner |
+| `public/media/work/pipeline.webp` | 1120 × 630 | `~/Desktop/Tsinghua/270059ea35579b4d5a2e0f0913366631.jpg` |
 | `public/media/work/xiaomi-ai.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/xiaomi-ai` |
 | `public/media/work/seb.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/seb` |
-| `public/media/work/skynomad.webp` | 1120 × 630 | Xiaomi official Skynomad interior image; credit `Image: Xiaomi` |
-| `public/media/work/yu7-hypervision.webp` | 1120 × 630 | Xiaomi official YU7 panoramic-display image; credit `Image: Xiaomi` |
-| `public/media/work/su7-duct.webp` | 1120 × 630 | Xiaomi official SU7 Ultra front three-quarter image; keep the engineering-connection caption in `src/content/site.ts` |
+| `public/media/work/skynomad.webp` | 1120 × 630 | `~/Desktop/personal/website/78ceda912861c5263ab8a3bb08188de4.jpg`; credit `Image: Xiaomi` |
+| `public/media/work/yu7-hypervision.webp` | 1120 × 630 | `~/Desktop/personal/website/512707016_1185639896941152_6825790499007650197_n.jpg`; credit `Image: Xiaomi` |
+| `public/media/work/su7-duct.webp` | 1120 × 630 | `~/Desktop/personal/website/xiaomi-su7-ultra-prototype_100937238.jpg`; keep the engineering-connection caption in `src/content/site.ts` |
 | `public/media/work/midea.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/midea` |
 | `public/media/work/parageta.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/parageta` |
 | `public/media/work/agile-charge.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/agile-charge` |

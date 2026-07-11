@@ -82,6 +82,14 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
 
           {!project.detail.status && project.detail.todo && <Reveal><p className="detail-todo">{project.detail.todo}</p></Reveal>}
 
+          {!project.detail.status && project.detail.relatedLinks && project.detail.relatedLinks.length > 0 && (
+            <Reveal>
+              <div className="detail-related-links">
+                {project.detail.relatedLinks.map((link) => <a className="text-link" href={link.href} key={link.label}>{link.label}</a>)}
+              </div>
+            </Reveal>
+          )}
+
           {!project.detail.status && project.detail.facts && project.detail.facts.length > 0 && (
             <Reveal>
               <section className="detail-facts" aria-labelledby="detail-facts-title">
@@ -89,6 +97,24 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
                 <dl>
                   {project.detail.facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
                 </dl>
+              </section>
+            </Reveal>
+          )}
+
+          {!project.detail.status && project.detail.video && (
+            <Reveal>
+              <section className="detail-video">
+                <div className="detail-video-frame">
+                  <iframe
+                    src={project.detail.video.embedUrl}
+                    title={project.detail.video.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <a className="text-link detail-video-link" href={project.detail.video.linkHref} target="_blank" rel="noopener noreferrer">{project.detail.video.linkLabel}</a>
               </section>
             </Reveal>
           )}

@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 0);
@@ -16,15 +17,28 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", open);
-    return () => document.body.classList.remove("menu-open");
+    if (!open) return;
+
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
   }, [open]);
 
   return (
-    <header className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
+    <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
       <nav className="nav-inner" aria-label={site.ui.primaryNavigation}>
         <a className="nav-name" href="#top" onClick={() => setOpen(false)}>{site.identity.name}</a>
-        <div className={`nav-links${open ? " nav-links-open" : ""}`}>
+        <div id="mobile-navigation" className={`nav-links${open ? " nav-links-open" : ""}`}>
           {site.navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
               {item.label}
@@ -34,7 +48,7 @@ export function Nav() {
         <div className="nav-actions">
           <ThemeToggle />
           <a className="cv-pill" href="/cv/GeZehao_CV.pdf">{site.ui.cv}</a>
-          <button className={`menu-toggle${open ? " menu-toggle-open" : ""}`} type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? site.ui.menuClose : site.ui.menuOpen}>
+          <button className={`menu-toggle${open ? " menu-toggle-open" : ""}`} type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? site.ui.menuClose : site.ui.menuOpen}>
             <span /><span />
           </button>
         </div>

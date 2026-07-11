@@ -1,10 +1,10 @@
-import { site } from "@/content/site";
+import { site, type EntityLink } from "@/content/site";
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-const entities = [...site.entities].sort((a, b) => b.label.length - a.label.length);
+const entities: EntityLink[] = [...site.entities].sort((a, b) => b.label.length - a.label.length);
 const matcher = new RegExp(`(${entities.map((entity) => escapeRegExp(entity.label)).join("|")})`, "g");
 
 export function EntityText({ text }: { text: string }) {
@@ -31,7 +31,7 @@ export function EntityText({ text }: { text: string }) {
   );
 }
 
-export function InlineLinkRow({ links }: { links: readonly { label: string; href: string; todo?: string }[] }) {
+export function InlineLinkRow({ links, showTodoMarker = true }: { links: readonly { label: string; href: string; todo?: string }[]; showTodoMarker?: boolean }) {
   return (
     <div className="inline-link-row">
       {links.map((link, index) => (
@@ -42,7 +42,9 @@ export function InlineLinkRow({ links }: { links: readonly { label: string; href
               {link.label}
             </a>
           ) : (
-            <span className="todo-inline-link" title={link.todo}>{link.label}<sup>{site.ui.todoMarker}</sup></span>
+            <span className={showTodoMarker ? "todo-inline-link" : undefined} title={link.todo}>
+              {link.label}{showTodoMarker && <sup>{site.ui.todoMarker}</sup>}
+            </span>
           )}
         </span>
       ))}
