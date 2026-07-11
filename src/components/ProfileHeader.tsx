@@ -22,7 +22,7 @@ export function ProfileHeader() {
         </div>
         <div className="profile-copy">
           <h1 id="profile-title">{site.header.heading}</h1>
-          <p className="profile-bio"><EntityText text={site.header.bio} /></p>
+          {site.header.bio.map((paragraph) => <p className="profile-bio" key={paragraph}><EntityText text={paragraph} /></p>)}
           <p className="profile-interests">{site.header.interests}</p>
           <InlineLinkRow links={site.header.links} />
         </div>

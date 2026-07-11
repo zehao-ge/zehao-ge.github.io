@@ -11,7 +11,7 @@ export function PublicationEntry() {
         <p className="publication-venue"><EntityText text={article.venue} /></p>
         <div className="publication-links">
           {article.links.map((link) => link.href ? (
-            <a className="text-link" href={link.href} target="_blank" rel="noreferrer" key={link.label}>{link.label}</a>
+            <a className="text-link" href={link.href} target="_blank" rel="noopener noreferrer" key={link.label}>{link.label}</a>
           ) : (
             <span className="todo-inline-link" title={link.todo} key={link.label}>{link.label}<sup>{site.ui.todoMarker}</sup></span>
           ))}

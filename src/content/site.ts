@@ -11,16 +11,37 @@ export type WorkImage = {
   recommendedSize: string;
   source: string;
 };
+export type WorkDetailImage = {
+  path: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+  attribution?: string;
+};
+export type WorkDetailFact = {
+  label: string;
+  value: string;
+};
+export type WorkDetail = {
+  body?: readonly string[];
+  facts?: readonly WorkDetailFact[];
+  images: readonly WorkDetailImage[];
+  externalLinks?: readonly LinkItem[];
+  todo?: string;
+  status?: string;
+};
 export type WorkItem = {
+  slug: string;
   number: string;
   title: string;
   year: string;
   context: string;
   status?: string;
   description: string;
-  images: readonly WorkImage[];
+  image: WorkImage;
   imageCaption?: string;
-  links: readonly LinkItem[];
+  detail: WorkDetail;
 };
 export type WorkGroup = { heading: string; items: readonly WorkItem[] };
 export type ExperienceItem = {
@@ -43,25 +64,61 @@ const workImage = (
   path: string,
   alt: string,
   source: string,
-  recommendedSize = "1120 × 630",
 ): WorkImage => ({
   path: `/media/work/${path}`,
   publicPath: `public/media/work/${path}`,
   alt,
-  width: recommendedSize === "560 × 315" ? 560 : 1120,
-  height: recommendedSize === "560 × 315" ? 315 : 630,
-  recommendedSize,
+  width: 1120,
+  height: 630,
+  recommendedSize: "1120 × 630",
   source,
 });
 
+const detailImage = (
+  slug: string,
+  file: string,
+  alt: string,
+  caption: string,
+  width = 1600,
+  height = 600,
+  attribution?: string,
+): WorkDetailImage => ({
+  path: `/media/work/${slug}/${file}.webp`,
+  alt,
+  width,
+  height,
+  caption,
+  attribution,
+});
+
+const coverDetailImage = (
+  file: string,
+  alt: string,
+  caption?: string,
+  attribution?: string,
+): WorkDetailImage => ({
+  path: `/media/work/${file}.webp`,
+  alt,
+  width: 1120,
+  height: 630,
+  caption,
+  attribution,
+});
+
+const detailInPreparation = "Detail page in preparation.";
+
 export const site = {
   identity: {
-    name: "Ge Zehao",
-    displayName: "Ge Zehao 「葛泽豪」",
-    title: "Ge Zehao — Embodied AI & Robot Learning",
+    name: "Zehao Ge",
+    preferredName: "Kai Ge",
+    givenName: "Zehao",
+    familyName: "Ge",
+    chineseName: "葛泽昊",
+    displayName: "Zehao (Kai) Ge 「葛泽昊」",
+    title: "Zehao (Kai) Ge — Embodied AI & Robot Learning",
     description:
-      "Ge Zehao builds interfaces for robot teleoperation, embodied AI, and production cockpits, and will join UW Robotics in fall 2026.",
-    canonical: "https://example.com/TODO-replace-canonical-production-URL",
+      "Zehao Ge builds interfaces for robot teleoperation, embodied AI, and production cockpits, and will join UW Robotics in fall 2026.",
+    canonical: "https://zehao-ge.github.io",
     email: "thehowge88@gmail.com",
     affiliation: "Tsinghua University Future Laboratory",
     alumniOf: "South China University of Technology",
@@ -94,13 +151,25 @@ export const site = {
     officialPage: "Official page ›",
     todoLink: "TODO: add link",
     todoMarker: "TODO",
+    detail: {
+      backToWork: "← Work",
+      workHref: "/#work",
+      viewProject: "View project ›",
+      factsHeading: "Project facts",
+      galleryHeading: "Project gallery",
+      externalLinksHeading: "External links",
+      projectNavigation: "Project navigation",
+      previousProject: "Previous project",
+      nextProject: "Next project",
+      titleSeparator: " — ",
+    },
   },
   navigation: [
-    { label: "Work", href: "#work" },
-    { label: "Publications", href: "#publications" },
-    { label: "Experience", href: "#experience" },
-    { label: "Awards", href: "#awards" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "/#work" },
+    { label: "Publications", href: "/#publications" },
+    { label: "Experience", href: "/#experience" },
+    { label: "Awards", href: "/#awards" },
+    { label: "Contact", href: "/#contact" },
   ] satisfies readonly NavItem[],
   entities: [
     { label: "M.S. in Technology Innovation (Robotics)", href: "", todo: "TODO: verify https://gix.uw.edu" },
@@ -129,9 +198,11 @@ export const site = {
       recommendedSize: "400 × 400",
       source: "new photo (owner)",
     },
-    heading: "Ge Zehao 「葛泽豪」",
-    bio:
-      "For four years I have been building new ways for people to control machines — sEMG input bands, spatial interfaces, steering wheels and cockpit systems for production cars. Now I build them for robots. I am a research assistant at the Future Laboratory, Tsinghua University, where I design foot-operated locomotion interfaces for omnidirectional mobile bases: when both hands are occupied teleoperating dual arms, how should the operator drive the robot's body? I study how interface design shapes demonstration quality — and the policies learned from it. Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces. I received my Bachelor's degree in Product Design from South China University of Technology. In fall 2026 I will join the M.S. in Technology Innovation (Robotics) program at the University of Washington.",
+    heading: "Zehao (Kai) Ge 「葛泽昊」",
+    bio: [
+      "I go by Kai. For four years I have been building new ways for people to control machines — sEMG input bands, spatial interfaces, steering wheels and cockpit systems for production cars. Now I build them for robots. I am a research assistant at the Future Laboratory, Tsinghua University, where I design foot-operated locomotion interfaces for omnidirectional mobile bases: when both hands are occupied teleoperating dual arms, how should the operator drive the robot's body? I study how interface design shapes demonstration quality — and the policies learned from it.",
+      "Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces. I received my Bachelor's degree in Product Design from South China University of Technology. In fall 2026 I will join the M.S. in Technology Innovation (Robotics) program at the University of Washington.",
+    ],
     interests: "Embodied AI · Robot Learning · Human–Robot Interaction · Mobile Manipulation",
     links: [
       { label: "CV", href: "/cv/GeZehao_CV.pdf" },
@@ -162,6 +233,7 @@ export const site = {
         heading: "Interfaces",
         items: [
           {
+            slug: "foot-interface",
             number: "1",
             title: "Foot-Operated Locomotion Interface for Whole-Body Teleoperation",
             year: "2026",
@@ -169,16 +241,22 @@ export const site = {
             status: "In development — physical prototype expected Sept 2026",
             description:
               "A foot-operated interface for omnidirectional mobile bases — foot-to-robot motion mapping, shared control, velocity control, haptic feedback — so an operator can drive the robot continuously while both hands run dual-arm teleoperation. I study its effect on teleoperation fluency, operational safety, and demonstration quality.",
-            images: [
-              workImage("foot-interface-1.webp", "Foot-operated locomotion interface concept visualization", "owner's desktop: ~/Desktop/GPT images/Frame 4.png"),
-              workImage("foot-interface-2.webp", "Foot-operated locomotion interface concept detail", "owner's desktop: ~/Desktop/GPT images/Frame 5.png", "560 × 315"),
-              workImage("foot-interface-3.webp", "Foot-operated locomotion interface concept detail", "owner's desktop: ~/Desktop/GPT images/Frame 6.png", "560 × 315"),
-            ],
+            image: workImage("foot-interface.webp", "Foot-operated locomotion interface concept visualization", "owner's desktop: ~/Desktop/GPT images/Frame 3.png"),
             imageCaption: "Concept visualization",
-            links: [],
+            detail: {
+              images: [
+                coverDetailImage(
+                  "foot-interface",
+                  "Foot-operated locomotion interface concept visualization",
+                  "Concept visualization",
+                ),
+              ],
+              todo: "TODO: content pending",
+            },
             // replace with prototype photos in Sept 2026, then remove caption.
           },
           {
+            slug: "folding-wheel",
             number: "2",
             title: "Folding Steering Wheel for Autonomous Driving — Xiaomi EV",
             year: "2024–2026",
@@ -186,29 +264,60 @@ export const site = {
             status: "Research project",
             description:
               "A folding steering wheel and input-system study for high-autonomy driving: when the car drives itself, what happens to the driver's controls? Explored stowable input geometry and mode-transition interaction for a future vehicle platform.",
-            images: [workImage("folding-wheel.webp", "Folding steering wheel project", "old site /untitled/xiaomi-sw")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/xiaomi-sw" }],
+            image: workImage("folding-wheel.webp", "Folding steering wheel concept shown from front and three-quarter views", "owner-supplied image: ~/Desktop/Frame 121.png"),
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
           },
           {
+            slug: "neuroware",
             number: "3",
             title: "Neuroware — sEMG Spatial Interaction Input Device",
             year: "2024",
             context: "Independent",
             description:
               "A wearable input device using surface electromyography to turn forearm muscle activity into a control signal for spatial interaction — sensing, hardware, and interaction mapping designed end to end.",
-            images: [workImage("neuroware.webp", "Neuroware sEMG spatial interaction input device", "old site /untitled/neuroware")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/neuroware" }],
+            image: workImage("neuroware.webp", "Neuroware sEMG spatial interaction input device", "old site /untitled/neuroware"),
+            detail: {
+              body: ["Neuroware is a sEMG-based spatial interaction input device."],
+              facts: [
+                { label: "Role", value: "Personal project" },
+                { label: "Tools", value: "Unity · Arduino · ESP8266 · sEMG sensors" },
+              ],
+              images: [
+                detailImage("neuroware", "01", "Neuroware project overview and research framing", "Project overview, trend research and dilemma definition"),
+                detailImage("neuroware", "02", "Neuroware technology analysis and comparable controller deconstruction", "Technology analysis and comparable-product deconstruction"),
+                detailImage("neuroware", "03", "Neuroware engineering principle, functional prototype and motion-data experiments", "Engineering principle, functional prototype and motion-data experiments"),
+                detailImage("neuroware", "04", "Neuroware Unity tests for spatial rotation, location and pinch detection", "Unity tests: spatial rotation, spatial location and pinch detection"),
+                detailImage("neuroware", "05", "Neuroware prototype development and final product output", "Prototype development and product output"),
+                detailImage("neuroware", "06", "Neuroware 3D printing process and exploded assembly", "3D printing process and exploded view"),
+                detailImage("neuroware", "07", "Neuroware pressure, sculpting and virtual-object interaction scenarios", "Usage scenarios: pressure, sculpting and virtual-object interaction"),
+                detailImage("neuroware", "08", "Neuroware compatibility studies and future interaction scenario", "Compatibility studies and future interaction scenario"),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/neuroware" }],
+            },
           },
           {
+            slug: "neuro-ui",
             number: "4",
             title: "Neuro UI — Spatial Interaction Interface System",
             year: "2024",
             context: "Independent",
             description: "The software counterpart to Neuroware: an interface system for controller-free spatial interaction.",
-            images: [workImage("neuro-ui.webp", "Neuro UI spatial interaction interface system", "old site /untitled/neuro-ui")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/neuro-ui" }],
+            image: workImage("neuro-ui.webp", "Neuro UI spatial interaction interface system", "old site /untitled/neuro-ui"),
+            detail: {
+              body: ["Neuro UI is a tactile spatial interaction user interface system based on Neuroware."],
+              images: [
+                detailImage("neuro-ui", "01", "Neuro UI concept and graphical user interface research", "Interface concept and graphical user-interface research"),
+                detailImage("neuro-ui", "02", "Neuro UI spatial interface elements and interaction model", "Interfacial elements: desktop, dock, virtual hand and AI loop"),
+                detailImage("neuro-ui", "03", "Neuro UI spatial navigation and object interaction demonstrations", "Spatial navigation and object-interaction demonstrations"),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/neuro-ui" }],
+            },
           },
           {
+            slug: "spatial-capstone",
             number: "5",
             title: "Spatial Interaction Input for 3D Transportation Systems",
             year: "2024–2025",
@@ -216,8 +325,11 @@ export const site = {
             status: "Capstone",
             description:
               "A capstone on spatial-computing input interfaces for 3D transportation scenarios — how operators express intent in volumetric space.",
-            images: [workImage("spatial-capstone.webp", "Spatial interaction input capstone", "owner (no public page)")],
-            links: [],
+            image: workImage("spatial-capstone.webp", "Spatial interaction input capstone", "owner (no public page)"),
+            detail: {
+              images: [],
+              todo: "TODO: content pending",
+            },
           },
         ],
       },
@@ -225,6 +337,7 @@ export const site = {
         heading: "Robots & AI",
         items: [
           {
+            slug: "pipeline",
             number: "6",
             title: "End-to-End Imitation Learning on Real Hardware",
             year: "2026",
@@ -232,27 +345,44 @@ export const site = {
             status: "Built",
             description:
               "A complete pipeline on SO-ARM 101, OpenArm, a mecanum-wheel mobile base, and LeRobot: calibration, leader–follower teleoperation, demonstration collection, ACT policy training, real-robot evaluation.",
-            images: [workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "new photo of rig (owner)")],
-            links: [],
+            image: workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "new photo of rig (owner)"),
+            detail: {
+              images: [],
+              todo: "TODO: content pending",
+            },
           },
           {
+            slug: "xiaomi-ai",
             number: "7",
             title: "Generative AI for Industrial Design — Xiaomi",
             year: "2024–2025",
             context: "Industry",
             description:
               "Data curation and classification for an industrial-design foundation model, with foundational study of CNNs and Transformers.",
-            images: [workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "old site /untitled/xiaomi-ai")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/xiaomi-ai" }],
+            image: workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "old site /untitled/xiaomi-ai"),
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
           },
           {
+            slug: "seb",
             number: "8",
             title: "Seb — Modular Robotic Vacuum Cleaner",
             year: "2023",
             context: "Independent",
             description: "A modular robotic vacuum system designed around reconfigurable functional units.",
-            images: [workImage("seb.webp", "Seb modular robotic vacuum cleaner", "old site /untitled/seb")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/seb" }],
+            image: workImage("seb.webp", "Seb modular robotic vacuum cleaner", "old site /untitled/seb"),
+            detail: {
+              images: [
+                detailImage("seb", "01", "Seb modular robotic vacuum cleaner project overview", "Project overview and product concept", 1007, 712),
+                detailImage("seb", "02", "Seb modular robotic vacuum cleaner final renderings", "Final product renderings", 1007, 712),
+                detailImage("seb", "03", "Seb robotic vacuum prototype teardown and development", "Prototype teardown and development", 927, 458),
+                detailImage("seb", "04", "Seb robotic vacuum internal structure and modular assembly", "Internal structures and modular assembly", 1007, 713),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/seb" }],
+              todo: "TODO: English case-study copy pending; the original case-study body is Chinese.",
+            },
           },
         ],
       },
@@ -260,6 +390,7 @@ export const site = {
         heading: "Products & Engineering",
         items: [
           {
+            slug: "skynomad",
             number: "9",
             title: "Skynomad Smart Cockpit — Xiaomi EV",
             year: "2025–2026",
@@ -267,11 +398,15 @@ export const site = {
             status: "Shipped",
             description:
               "Smart-cockpit engineering for the Xiaomi Skynomad, released 2026 — translating styling and HMI concepts into mass-producible, human-centered structures.",
-            images: [workImage("skynomad.webp", "Xiaomi Skynomad smart cockpit", "xiaomiev.com/skynomad (credit Image: Xiaomi)")],
+            image: workImage("skynomad.webp", "Xiaomi Skynomad cockpit interior", "xiaomiev.com/skynomad (credit Image: Xiaomi)"),
             imageCaption: "Image: Xiaomi",
-            links: [{ label: "Official page ›", href: "https://www.xiaomiev.com/skynomad" }],
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
           },
           {
+            slug: "yu7-hypervision",
             number: "10",
             title: "HyperVision Panoramic Display — Xiaomi YU7",
             year: "2025",
@@ -279,50 +414,104 @@ export const site = {
             status: "Shipped",
             description:
               "Collaborated with engineering teams and suppliers to bring the HyperVision panoramic cockpit display into mass production.",
-            images: [workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "Xiaomi official (credit)")],
+            image: workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "xiaomiev.com/yu7 (credit Image: Xiaomi)"),
             imageCaption: "Image: Xiaomi",
-            links: [{ label: "Official page ›", href: "", todo: "TODO: add Xiaomi YU7 official page" }],
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
           },
           {
+            slug: "su7-duct",
             number: "11",
             title: "Functional Air Duct System — Xiaomi SU7 Ultra",
             year: "2025",
             context: "Industry",
             status: "Shipped",
             description: "Engineering delivery of the functional front air-duct system on the SU7 Ultra.",
-            images: [workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "Xiaomi official (credit)")],
-            imageCaption: "Image: Xiaomi",
-            links: [{ label: "Official page ›", href: "", todo: "TODO: add Xiaomi SU7 Ultra official page" }],
+            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "xiaomiev.com/ultra (credit Image: Xiaomi)"),
+            imageCaption: "Image: Xiaomi — SU7 Ultra. I engineered the functional front air-duct system.",
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
           },
           {
+            slug: "midea",
             number: "12",
             title: "1㎡ Integrated Cooking Center — Midea",
             year: "2024",
             context: "Sponsored",
             description:
               "An integrated cooking appliance with pure-electric internal circulation for Gen-Z users, developed with Midea Group; led user research, structure, and appearance design; reached market.",
-            images: [workImage("midea.webp", "Midea integrated cooking center", "old site /untitled/midea")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/midea" }],
+            image: workImage("midea.webp", "Midea integrated cooking center", "old site /untitled/midea"),
+            detail: {
+              body: ["A brief record of this 7-month project. The project ranked in the top 3 among 10 groups."],
+              facts: [
+                { label: "Role", value: "Leadership & Project Management · Business Strategy" },
+                { label: "Team", value: "10-person team" },
+                { label: "Duration", value: "7 months" },
+                { label: "Collaborators", value: "Midea Group" },
+              ],
+              images: [
+                detailImage("midea", "01", "Midea integrated cooking center project overview and timeline", "Project overview and timeline"),
+                detailImage("midea", "02", "Midea integrated cooking center market research and Gen Z cooking behavior", "Market research and Gen Z cooking behavior"),
+                detailImage("midea", "03", "Midea cooking center co-creation, workflow and ergonomics", "Living-environment co-creation, workflow and ergonomics"),
+                detailImage("midea", "04", "Midea cooking center internal structure, fluid simulation and functional model", "Internal structure, fluid simulation and functional model"),
+                detailImage("midea", "05", "Midea integrated cooking center final output and product details", "Final output and product details"),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/midea" }],
+            },
           },
           {
+            slug: "parageta",
             number: "13",
             title: "Parageta — Parametric Structural Optimization in Footwear",
             year: "2023",
             context: "Independent",
             description:
               "Parametric footwear as a structural-optimization study in Fusion 360 generative design, grounded in East Asian formal language.",
-            images: [workImage("parageta.webp", "Parageta parametric footwear study", "old site /untitled/parageta")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/parageta" }],
+            image: workImage("parageta.webp", "Parageta parametric footwear study", "old site /untitled/parageta"),
+            detail: {
+              body: ["Parameterized Footwear Based on Oriental Culture."],
+              facts: [
+                { label: "Role", value: "Personal project" },
+                { label: "Tools", value: "Grasshopper · Fusion 360" },
+              ],
+              images: [
+                detailImage("parageta", "01", "Parageta proposal, market research and brand research", "Proposal, market research and brand research"),
+                detailImage("parageta", "02", "Parageta footwear deconstruction and formal reconstruction", "Modern footwear deconstruction and formal reconstruction"),
+                detailImage("parageta", "03", "Parageta component deduction and physical prototype", "Component deduction and physical prototype"),
+                detailImage("parageta", "04", "Parageta Grasshopper parameterization and Fusion 360 generation", "Grasshopper parameterization and Fusion 360 generation"),
+                detailImage("parageta", "05", "Parageta final footwear design output", "Final design output"),
+                detailImage("parageta", "06", "Parageta modeling, exploded view and project review", "Modeling, exploded view and project review"),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/parageta" }],
+            },
           },
           {
+            slug: "agile-charge",
             number: "14",
             title: "AGILE CHARGE — Mobile Charging Infrastructure",
             year: "2024",
             context: "Independent",
             description:
               "An autonomous charging vehicle proposed as mobile charging infrastructure; UNESCO SDG certification (09).",
-            images: [workImage("agile-charge.webp", "AGILE CHARGE mobile charging infrastructure", "old site /untitled/agile-charge")],
-            links: [{ label: "Project page ›", href: "https://gezehao.webflow.io/untitled/agile-charge" }],
+            image: workImage("agile-charge.webp", "AGILE CHARGE mobile charging infrastructure", "old site /untitled/agile-charge"),
+            detail: {
+              body: ["Flexible EV Charging Infrastructure Service System."],
+              facts: [{ label: "Role", value: "Personal project" }],
+              images: [
+                detailImage("agile-charge", "01", "AGILE CHARGE system overview", "System overview"),
+                detailImage("agile-charge", "02", "AGILE CHARGE context, field research and regional analysis", "Context, field research and regional analysis"),
+                detailImage("agile-charge", "03", "AGILE CHARGE pain-point deduction, technology research and stakeholder map", "Pain-point deduction, technology research and stakeholders"),
+                detailImage("agile-charge", "04", "AGILE CHARGE ideation, touchpoint evaluation and service-region segmentation", "Ideation, touchpoint evaluation and service-region segmentation"),
+                detailImage("agile-charge", "05", "AGILE CHARGE product layout and internal structure", "Product layout and inner-structure analysis"),
+                detailImage("agile-charge", "06", "AGILE CHARGE product output and charging workflow", "Product output and charging workflow"),
+                detailImage("agile-charge", "07", "AGILE CHARGE service blueprint and ecosystem scenario", "Service blueprint and ecosystem scenario"),
+              ],
+              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/agile-charge" }],
+            },
           },
         ],
       },
@@ -453,7 +642,7 @@ export const site = {
       { label: "Google Scholar", href: "", todo: "TODO: add Google Scholar URL" },
       { label: "LinkedIn", href: "", todo: "TODO: add LinkedIn URL" },
     ] satisfies readonly LinkItem[],
-    footer: "© 2026 Ge Zehao · Last updated July 2026",
+    footer: "© 2026 Zehao Ge · Last updated July 2026",
   },
   todos: [
     "TODO: add exact month for the 2026 University of Washington admission news item",
@@ -477,8 +666,12 @@ export const site = {
     "TODO: add Xiaomi SU7 Ultra official page",
     "TODO(owner): verify the division of work between Skynomad and YU9, and that naming the YU9 program publicly is acceptable",
     "TODO: replace public/cv/GeZehao_CV.pdf with a public CV that omits date of birth and phone number and states the degree exactly as Bachelor's degree in Product Design",
-    "TODO: replace canonical production URL",
   ],
 } as const;
+
+export const workItems: readonly WorkItem[] = site.work.groups.reduce<WorkItem[]>((items, group) => {
+  items.push(...group.items);
+  return items;
+}, []);
 
 export type SiteContent = typeof site;

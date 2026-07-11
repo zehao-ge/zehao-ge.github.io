@@ -32,6 +32,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@context": "https://schema.org",
     "@type": "Person",
     name: site.identity.name,
+    alternateName: site.identity.preferredName,
+    givenName: site.identity.givenName,
+    familyName: site.identity.familyName,
     affiliation: { "@type": "Organization", name: site.identity.affiliation },
     alumniOf: {
       "@type": "EducationalOrganization",

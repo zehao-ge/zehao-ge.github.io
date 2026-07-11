@@ -33,7 +33,7 @@ export default function Home() {
                 <div className="work-list">{group.items.map((item) => <Reveal key={item.number}><WorkEntry item={item} /></Reveal>)}</div>
               </section>
             ))}
-            <Reveal className="portfolio-outro"><a className="text-link" href={site.work.portfolio.href} target="_blank" rel="noreferrer">{site.work.portfolio.label}</a><p className="caption">{site.work.portfolio.caption}</p></Reveal>
+            <Reveal className="portfolio-outro"><a className="text-link" href={site.work.portfolio.href} target="_blank" rel="noopener noreferrer">{site.work.portfolio.label}</a><p className="caption">{site.work.portfolio.caption}</p></Reveal>
           </div>
         </section>
         <section id="publications" className="section alt-section" aria-labelledby="publications-title">

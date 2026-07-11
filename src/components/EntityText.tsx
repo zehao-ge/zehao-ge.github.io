@@ -22,7 +22,7 @@ export function EntityText({ text }: { text: string }) {
           );
         }
         return (
-          <a className="entity-link" href={entity.href} target="_blank" rel="noreferrer" key={`${part}-${index}`}>
+          <a className="entity-link" href={entity.href} target="_blank" rel="noopener noreferrer" key={`${part}-${index}`}>
             {part}
           </a>
         );
@@ -38,7 +38,7 @@ export function InlineLinkRow({ links }: { links: readonly { label: string; href
         <span className="inline-link-item" key={link.label}>
           {index > 0 && <span className="link-separator" aria-hidden="true">{site.ui.linkSeparator}</span>}
           {link.href ? (
-            <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noreferrer" : undefined}>
+            <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
               {link.label}
             </a>
           ) : (

@@ -37,7 +37,7 @@ export function Footer() {
           <button type="button" className="copy-button" onClick={copy} aria-label={site.ui.copyEmail}><span className="copy-icon" aria-hidden="true" /></button>
           <span className="copy-status" aria-live="polite">{copied ? site.ui.copied : ""}</span>
         </div>
-        <div className="profile-links">{site.contact.profiles.map((profile) => profile.href ? <a className="text-link" href={profile.href} target="_blank" rel="noreferrer" key={profile.label}>{profile.label}</a> : <span className="todo-inline-link" title={profile.todo} key={profile.label}>{profile.label}<sup>{site.ui.todoMarker}</sup></span>)}</div>
+        <div className="profile-links">{site.contact.profiles.map((profile) => profile.href ? <a className="text-link" href={profile.href} target="_blank" rel="noopener noreferrer" key={profile.label}>{profile.label}</a> : <span className="todo-inline-link" title={profile.todo} key={profile.label}>{profile.label}<sup>{site.ui.todoMarker}</sup></span>)}</div>
         <p className="caption footer-bottom">{site.contact.footer}</p>
       </div>
     </footer>
