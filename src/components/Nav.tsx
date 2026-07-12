@@ -37,7 +37,7 @@ export function Nav() {
   return (
     <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
       <nav className="nav-inner" aria-label={site.ui.primaryNavigation}>
-        <a className="nav-name" href="#top" onClick={() => setOpen(false)}>{site.identity.name}</a>
+        <a className="nav-name" href="#top" onClick={() => setOpen(false)}>{site.identity.navWordmark}</a>
         <div id="mobile-navigation" className={`nav-links${open ? " nav-links-open" : ""}`}>
           {site.navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>

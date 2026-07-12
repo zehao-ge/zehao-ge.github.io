@@ -104,6 +104,7 @@ const detailInPreparation = "Detail page in preparation.";
 export const site = {
   identity: {
     name: "Zehao Ge",
+    navWordmark: "「葛泽昊」",
     preferredName: "Kai Ge",
     givenName: "Zehao",
     familyName: "Ge",
@@ -171,10 +172,13 @@ export const site = {
     { label: "University of Washington", href: "https://www.washington.edu" },
     { label: "Zhejiang University", href: "https://www.zju.edu.cn/english/" },
     { label: "Xiaomi Skynomad", href: "https://www.xiaomiev.com/skynomad" },
-    { label: "Xiaomi EV", href: "https://www.xiaomiev.com" },
+    { label: "Xiaomi EV", href: "https://www.xiaomiev.com/" },
     { label: "Midea Group", href: "https://www.midea.com.cn/en" },
     { label: "Siemens China", href: "https://www.siemens.com/en-us/company/" },
     { label: "iF Design Award", href: "https://ifdesign.com/en" },
+    { label: "New York Product Design Awards", href: "https://nydesignawards.com/" },
+    { label: "TITAN Innovation Awards", href: "https://titaninnovationawards.com/" },
+    { label: "International Design Awards", href: "https://www.idesignawards.com/" },
     { label: "SO-ARM 101", href: "https://github.com/TheRobotStudio/SO-ARM100" },
     { label: "OpenArm", href: "https://openarm.dev/" },
     { label: "LeRobot", href: "https://github.com/huggingface/lerobot" },
@@ -190,13 +194,10 @@ export const site = {
       recommendedSize: "400 × 400",
       source: "owner-supplied photo: ~/Desktop/personal/d8d7a0edfdab8a9ba60dd85e03750d3e.jpg",
     },
-    heading: {
-      latin: "Zehao (Kai) Ge",
-      chinese: "「葛泽昊」",
-    },
+    heading: "Zehao (Kai) Ge",
     bio: [
       "I go by Kai. I am a research assistant at the Future Laboratory, Tsinghua University, working on embodied AI and human–robot interaction.",
-      "Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces, shipping HMI on the Skynomad and YU7 platforms.",
+      "Before research, I spent two years at Xiaomi EV engineering cockpit human–machine interfaces, shipping HMI on the SU7, YU7, and Skynomad platforms.",
       "I received my bachelor's degree in Product Design from South China University of Technology. In fall 2026 I will join the M.S. in Technology Innovation (Robotics) at the University of Washington.",
     ],
     statements: [
@@ -208,12 +209,12 @@ export const site = {
         label: "Research Interest:",
         text: "Embodied AI, robot learning, human–robot interaction, mobile manipulation.",
       },
-      {
-        label: "Research Question:",
-        text: "When both hands are occupied teleoperating dual arms, how should the operator drive the robot's body? I study how interface design shapes demonstration quality — and the policies learned from it.",
-      },
     ],
-    emailDisplay: "Email: thehowge88 [AT] gmail.com",
+    email: {
+      label: "Email:",
+      address: "thehowge88@gmail.com",
+      href: "mailto:thehowge88@gmail.com",
+    },
     links: [
       { label: "CV", href: "/cv/GeZehao_CV.pdf" },
       { label: "Email", href: "mailto:thehowge88@gmail.com" },
@@ -225,9 +226,9 @@ export const site = {
   news: {
     heading: "News",
     items: [
-      { date: "2026", text: "Admitted to the M.S. in Technology Innovation (Robotics), University of Washington. TODO: exact month" },
+      { date: "2026", text: "Admitted to the M.S. in Technology Innovation (Robotics), University of Washington. Starting September 2026." },
       { date: "06/2026", text: "Joined the Future Laboratory at Tsinghua University as a research assistant in embodied AI and human–robot interaction." },
-      { date: "06/2026", text: "Completed two years at Xiaomi EV; cockpit HMI shipped on the Skynomad and YU7 platforms." },
+      { date: "06/2026", text: "Completed two years at Xiaomi EV; cockpit HMI shipped on the SU7, YU7, and Skynomad platforms." },
       { date: "04/2025", text: "Paper on AI-driven manufacturing systems published in Frontiers in Artificial Intelligence and Applications (EI Compendex)." },
       { date: "2025", text: "Excellent Graduation Thesis, university level, SCUT." },
       { date: "2024", text: "iF Design Award, Top 300 worldwide." },
@@ -236,7 +237,7 @@ export const site = {
   },
   work: {
     heading: "Selected Work",
-    framing: "One question, many machines: how should a person tell a machine what to do?",
+    framing: "Interfaces are downstream of architecture. I work from the bottom up.",
     groups: [
       {
         heading: "Interfaces",
@@ -301,7 +302,6 @@ export const site = {
                 detailImage("neuroware", "07", "Neuroware pressure, sculpting and virtual-object interaction scenarios", "Usage scenarios: pressure, sculpting and virtual-object interaction"),
                 detailImage("neuroware", "08", "Neuroware compatibility studies and future interaction scenario", "Compatibility studies and future interaction scenario"),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/neuroware" }],
             },
           },
           {
@@ -319,7 +319,6 @@ export const site = {
                 detailImage("neuro-ui", "02", "Neuro UI spatial interface elements and interaction model", "Interfacial elements: desktop, dock, virtual hand and AI loop"),
                 detailImage("neuro-ui", "03", "Neuro UI spatial navigation and object interaction demonstrations", "Spatial navigation and object-interaction demonstrations"),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/neuro-ui" }],
             },
           },
           {
@@ -355,7 +354,7 @@ export const site = {
             image: workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "~/Desktop/Tsinghua/270059ea35579b4d5a2e0f0913366631.jpg"),
             detail: {
               images: [],
-              todo: "TODO: content pending",
+              status: detailInPreparation,
             },
           },
           {
@@ -375,7 +374,6 @@ export const site = {
               images: [
                 detailImage("xiaomi-ai", "01", "Front and rear three-quarter vehicle styling outputs from the Xiaomi generative AI project", "Vehicle styling outputs", 1600, 623),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/xiaomi-ai" }],
             },
           },
           {
@@ -393,8 +391,6 @@ export const site = {
                 detailImage("seb", "03", "Seb robotic vacuum prototype teardown and development", "Prototype teardown and development", 927, 458),
                 detailImage("seb", "04", "Seb robotic vacuum internal structure and modular assembly", "Internal structures and modular assembly", 1007, 713),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/seb" }],
-              todo: "TODO: English case-study copy pending; the original case-study body is Chinese.",
             },
           },
         ],
@@ -486,7 +482,6 @@ export const site = {
                 detailImage("midea", "04", "Midea cooking center internal structure, fluid simulation and functional model", "Internal structure, fluid simulation and functional model"),
                 detailImage("midea", "05", "Midea integrated cooking center final output and product details", "Final output and product details"),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/midea" }],
             },
           },
           {
@@ -512,7 +507,6 @@ export const site = {
                 detailImage("parageta", "05", "Parageta final footwear design output", "Final design output"),
                 detailImage("parageta", "06", "Parageta modeling, exploded view and project review", "Modeling, exploded view and project review"),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/parageta" }],
             },
           },
           {
@@ -536,17 +530,11 @@ export const site = {
                 detailImage("agile-charge", "06", "AGILE CHARGE product output and charging workflow", "Product output and charging workflow"),
                 detailImage("agile-charge", "07", "AGILE CHARGE service blueprint and ecosystem scenario", "Service blueprint and ecosystem scenario"),
               ],
-              externalLinks: [{ label: "Original case study ›", href: "https://gezehao.webflow.io/untitled/agile-charge" }],
             },
           },
         ],
       },
     ] satisfies readonly WorkGroup[],
-    portfolio: {
-      label: "Full design portfolio ›",
-      href: "https://gezehao.webflow.io/",
-      caption: "More projects — product design, spatial computing, and interaction research.",
-    },
   },
   publications: {
     heading: "Publications",
@@ -557,7 +545,6 @@ export const site = {
       venue: "Frontiers in Artificial Intelligence and Applications (FAIA), Vol. 405, 2025 — EI Compendex indexed",
       datePublished: "2025-04",
       links: [
-        { label: "pdf", href: "https://journals.sagepub.com/doi/pdf/10.3233/FAIA250343?download=true" },
         { label: "publisher", href: "https://journals.sagepub.com/doi/10.3233/FAIA250343" },
       ],
     },
@@ -671,7 +658,6 @@ export const site = {
     footer: "© 2026 Zehao Ge · Last updated July 2026",
   },
   todos: [
-    "TODO: add exact month for the 2026 University of Washington admission news item",
     "TODO: add Google Scholar URL",
     "TODO(owner): verify the division of work between Skynomad and YU9, and that naming the YU9 program publicly is acceptable",
     "TODO: replace public/cv/GeZehao_CV.pdf with a public CV that omits date of birth and phone number and states the degree exactly as Bachelor's degree in Product Design",

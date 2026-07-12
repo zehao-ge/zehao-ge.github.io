@@ -25,8 +25,7 @@ export function ProfileHeader() {
         </div>
         <div className="profile-copy">
           <h1 id="profile-title">
-            <span className="profile-name-unit">{site.header.heading.latin}</span>{" "}
-            <span className="profile-name-unit">{site.header.heading.chinese}</span>
+            <span className="profile-name-unit">{site.header.heading}</span>
           </h1>
           {site.header.bio.map((paragraph) => <p className="profile-bio" key={paragraph}><EntityText text={paragraph} /></p>)}
           <div className="profile-statements">
@@ -36,7 +35,9 @@ export function ProfileHeader() {
               </p>
             ))}
           </div>
-          <p className="profile-email">{site.header.emailDisplay}</p>
+          <p className="profile-email">
+            {site.header.email.label}{" "}<a href={site.header.email.href}>{site.header.email.address}</a>
+          </p>
         </div>
       </div>
     </section>

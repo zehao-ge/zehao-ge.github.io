@@ -84,6 +84,8 @@ h3 { margin:0; font-size:20px; font-weight:600; letter-spacing:-.01em; line-heig
 .profile-statements p+p { margin-top:14px; }
 .profile-statements strong { font-weight:600; }
 .profile-email { margin:24px 0 0; color:var(--text-secondary); }
+.profile-email a { color:var(--accent); }
+.profile-email a:hover { color:var(--accent-hover); text-decoration:underline; text-underline-offset:3px; }
 .inline-link-row { display:flex; flex-wrap:wrap; gap:5px 8px; margin-top:16px; font-size:14px; }
 .inline-link-item { display:inline-flex; gap:8px; align-items:baseline; }
 .link-separator { color:var(--text-secondary); }
@@ -112,8 +114,6 @@ h3 { margin:0; font-size:20px; font-weight:600; letter-spacing:-.01em; line-heig
 .context-tag { white-space:nowrap; }
 .work-description { max-width:700px; margin:16px 0 0; }
 .work-links { display:flex; flex-wrap:wrap; gap:16px; margin-top:16px; }
-.portfolio-outro { margin-top:32px; }
-.portfolio-outro .caption { margin:8px 0 0; }
 
 .work-detail-main { padding:112px 0 80px; }
 .work-detail h1 { max-width:860px; font-size:clamp(26px,3.5vw,34px); letter-spacing:-.015em; line-height:1.12; }
