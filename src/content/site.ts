@@ -1,5 +1,6 @@
 export type NavItem = { label: string; href: string };
-export type LinkItem = { label: string; href: string; todo?: string };
+export type ContactIconName = "email" | "cv" | "scholar" | "github" | "linkedin";
+export type LinkItem = { label: string; href: string; todo?: string; icon?: ContactIconName };
 export type EntityLink = { label: string; href: string; todo?: string };
 export type NewsItem = { date: string; text: string };
 export type WorkImage = {
@@ -131,6 +132,7 @@ export const site = {
     darkMode: "Use dark mode",
     toggleTheme: "Toggle color theme",
     connect: "Connect",
+    getInTouch: "Get in touch",
     home: "Home",
     homeHref: "/#top",
     nameToggleToChinese: "Show Chinese name",
@@ -671,13 +673,11 @@ export const site = {
     metaDescription: "Contact Zehao Ge about research collaborations and graduate opportunities in embodied AI and human–robot interaction.",
     lede: "Open to research collaborations and graduate opportunities in embodied AI and human–robot interaction.",
     profiles: [
-      { label: "CV", href: "/cv/GeZehao_CV.pdf" },
-      { label: "Google Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ" },
-      { label: "GitHub", href: "https://github.com/zehao-ge" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
+      { label: "CV", href: "/cv/GeZehao_CV.pdf", icon: "cv" },
+      { label: "Google Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ", icon: "scholar" },
+      { label: "GitHub", href: "https://github.com/zehao-ge", icon: "github" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/", icon: "linkedin" },
     ] satisfies readonly LinkItem[],
-    backLabel: "← Back to homepage",
-    backHref: "/",
     footer: "© 2026 Zehao Ge · Last updated July 2026",
   },
   todos: [

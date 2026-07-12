@@ -11,9 +11,9 @@ export function ProfileHeader() {
 
   return (
     <section className="profile-header section" aria-labelledby="profile-title">
-      <div className="content-width profile-grid">
+      <div className="site-container profile-grid">
         <div className="profile-aside">
-          <div className="portrait-frame">
+          <a className="portrait-frame portrait-link" href="/connect" aria-label={site.ui.getInTouch}>
             {portraitExists ? (
               <Image src={portrait.path} alt={portrait.alt} width={portrait.width} height={portrait.height} priority />
             ) : (
@@ -21,7 +21,8 @@ export function ProfileHeader() {
                 <span>{site.ui.portraitPlaceholder}</span>
               </div>
             )}
-          </div>
+            <span className="portrait-inset" aria-hidden="true" />
+          </a>
           <div className="profile-link-rows">
             {site.header.links.map((row) => <InlineLinkRow links={row} key={row[0].label} />)}
           </div>

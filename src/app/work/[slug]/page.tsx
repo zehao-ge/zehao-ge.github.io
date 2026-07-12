@@ -53,7 +53,7 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
       <a className="skip-link" href="#project-content">{site.ui.skip}</a>
       <Nav />
       <main id="project-content" className="work-detail-main">
-        <article className="work-detail content-width">
+        <article className="work-detail site-container">
           <Reveal priority><a className="detail-back text-link" href={site.ui.detail.workHref}>{site.ui.detail.backToWork}</a></Reveal>
           <Reveal priority><h1>{project.title}</h1></Reveal>
           <Reveal priority>

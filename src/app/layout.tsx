@@ -24,11 +24,6 @@ export const metadata: Metadata = {
     images: ["/og.svg"],
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-16.png", type: "image/png", sizes: "16x16" },
-    ],
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
@@ -64,7 +59,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <head><ThemeScript /></head>
+      <head>
+        <ThemeScript />
+        <link rel="icon" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/favicon.svg" />
+      </head>
       <body id="top">
         {children}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([person, article]) }} />

@@ -136,13 +136,15 @@ export function Nav({ connectPage = false }: { connectPage?: boolean }) {
 
   return (
     <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
-      <nav className="nav-inner" aria-label={site.ui.primaryNavigation}>
-        <a className="nav-name" href={site.ui.homeHref} onClick={() => setOpen(false)} aria-label={site.identity.navWordmark}>
-          <span className="nav-name-switch">
-            <span className="nav-name-rest">{site.identity.navWordmark}</span>
-            <span className="nav-name-hover" aria-hidden="true">{site.ui.home}</span>
-          </span>
-        </a>
+      <nav className="nav-inner site-container" aria-label={site.ui.primaryNavigation}>
+        <div className="nav-brand-slot">
+          <a className="nav-name" href={site.ui.homeHref} onClick={() => setOpen(false)} aria-label={site.identity.navWordmark}>
+            <span className="nav-name-switch">
+              <span className="nav-name-rest">{site.identity.navWordmark}</span>
+              <span className="nav-name-hover" aria-hidden="true">{site.ui.home}</span>
+            </span>
+          </a>
+        </div>
         <div id="mobile-navigation" className={`nav-links${open ? " nav-links-open" : ""}`}>
           {site.navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>

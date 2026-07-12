@@ -29,7 +29,7 @@ export function Footer() {
   }
   return (
     <footer id="contact" className="section footer-section">
-      <div className="content-width">
+      <div className="site-container">
         <h2>{site.contact.heading}</h2>
         <p className="body-large footer-lede">{site.contact.lede}</p>
         <div className="email-row">
