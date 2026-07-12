@@ -125,12 +125,12 @@ export const site = {
   ui: {
     skip: "Skip to content",
     primaryNavigation: "Primary navigation",
-    menuOpen: "Open navigation",
-    menuClose: "Close navigation",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
     lightMode: "Use light mode",
     darkMode: "Use dark mode",
     toggleTheme: "Toggle color theme",
-    cv: "CV",
+    connect: "Connect",
     showMore: "Show more ›",
     showLess: "Show less",
     copyEmail: "Copy email address",
@@ -162,7 +162,6 @@ export const site = {
     { label: "Publications", href: "/#publications" },
     { label: "Experience", href: "/#experience" },
     { label: "Awards", href: "/#awards" },
-    { label: "Contact", href: "/#contact" },
   ] satisfies readonly NavItem[],
   entities: [
     { label: "M.S. in Technology Innovation (Robotics)", href: "https://gix.uw.edu/graduate/msti/robotics-track" },
@@ -216,12 +215,15 @@ export const site = {
       href: "mailto:thehowge88@gmail.com",
     },
     links: [
-      { label: "CV", href: "/cv/GeZehao_CV.pdf" },
-      { label: "Email", href: "mailto:thehowge88@gmail.com" },
-      { label: "Scholar", href: "", todo: "TODO: add Google Scholar URL" },
-      { label: "GitHub", href: "https://github.com/zehao-ge" },
-      { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
-    ] satisfies readonly LinkItem[],
+      [
+        { label: "Email", href: "mailto:thehowge88@gmail.com" },
+        { label: "Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ" },
+      ],
+      [
+        { label: "GitHub", href: "https://github.com/zehao-ge" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
+      ],
+    ] satisfies readonly (readonly LinkItem[])[],
   },
   news: {
     heading: "News",
@@ -229,7 +231,7 @@ export const site = {
       { date: "2026", text: "Admitted to the M.S. in Technology Innovation (Robotics), University of Washington. Starting September 2026." },
       { date: "06/2026", text: "Joined the Future Laboratory at Tsinghua University as a research assistant in embodied AI and human–robot interaction." },
       { date: "06/2026", text: "Completed two years at Xiaomi EV; cockpit HMI shipped on the SU7, YU7, and Skynomad platforms." },
-      { date: "04/2025", text: "Paper on AI-driven manufacturing systems published in Frontiers in Artificial Intelligence and Applications (EI Compendex)." },
+      { date: "04/2025", text: "Paper on AI-driven intelligent manufacturing systems published in Frontiers in Artificial Intelligence and Applications (EI Compendex)." },
       { date: "2025", text: "Excellent Graduation Thesis, university level, SCUT." },
       { date: "2024", text: "iF Design Award, Top 300 worldwide." },
     ] satisfies readonly NewsItem[],
@@ -285,7 +287,7 @@ export const site = {
             context: "Independent",
             description:
               "A wearable input device using surface electromyography to turn forearm muscle activity into a control signal for spatial interaction — sensing, hardware, and interaction mapping designed end to end.",
-            image: workImage("neuroware.webp", "Neuroware sEMG spatial interaction input device", "old site /untitled/neuroware"),
+            image: workImage("neuroware.webp", "Neuroware sEMG spatial interaction input device", "portfolio listing thumbnail /untitled/neuroware"),
             detail: {
               body: ["Neuroware is a sEMG-based spatial interaction input device."],
               facts: [
@@ -311,7 +313,7 @@ export const site = {
             year: "2024",
             context: "Independent",
             description: "The software counterpart to Neuroware: an interface system for controller-free spatial interaction.",
-            image: workImage("neuro-ui.webp", "Neuro UI spatial interaction interface system", "old site /untitled/neuro-ui"),
+            image: workImage("neuro-ui.webp", "Neuro UI spatial interaction interface system", "portfolio listing thumbnail /untitled/neuro-ui"),
             detail: {
               body: ["Neuro UI is a tactile spatial interaction user interface system based on Neuroware."],
               images: [
@@ -330,7 +332,7 @@ export const site = {
             status: "Capstone",
             description:
               "A capstone on spatial-computing input interfaces for 3D transportation scenarios — how operators express intent in volumetric space.",
-            image: workImage("spatial-capstone.webp", "Spatial interaction input capstone", "owner (no public page)"),
+            image: workImage("spatial-capstone.webp", "Spatial computing in a 3D transportation system", "portfolio listing thumbnail; listing card href is #"),
             detail: {
               body: ["A concept project on spatial-computing input interfaces for 3D transportation systems."],
               images: [],
@@ -365,7 +367,7 @@ export const site = {
             context: "Industry",
             description:
               "Data curation and classification for an industrial-design foundation model, with foundational study of CNNs and Transformers.",
-            image: workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "old site /untitled/xiaomi-ai"),
+            image: workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "portfolio listing thumbnail /untitled/xiaomi-ai"),
             detail: {
               body: [
                 "During my internship at Xiaomi Automotive, I also contributed to the development of a generative visual model for internal use by the industrial design department.",
@@ -383,7 +385,7 @@ export const site = {
             year: "2023",
             context: "Independent",
             description: "A modular robotic vacuum system designed around reconfigurable functional units.",
-            image: workImage("seb.webp", "Seb modular robotic vacuum cleaner", "old site /untitled/seb"),
+            image: workImage("seb.webp", "Seb modular robotic vacuum cleaner", "portfolio listing thumbnail /untitled/seb"),
             detail: {
               images: [
                 detailImage("seb", "01", "Seb modular robotic vacuum cleaner project overview", "Project overview and product concept", 1007, 712),
@@ -466,7 +468,7 @@ export const site = {
             context: "Sponsored",
             description:
               "An integrated cooking appliance with pure-electric internal circulation for Gen-Z users, developed with Midea Group; led user research, structure, and appearance design; reached market.",
-            image: workImage("midea.webp", "Midea integrated cooking center", "old site /untitled/midea"),
+            image: workImage("midea.webp", "Midea integrated cooking center", "portfolio listing thumbnail /untitled/midea"),
             detail: {
               body: ["A brief record of this 7-month project. The project ranked in the top 3 among 10 groups."],
               facts: [
@@ -492,7 +494,7 @@ export const site = {
             context: "Independent",
             description:
               "Parametric footwear as a structural-optimization study in Fusion 360 generative design, grounded in East Asian formal language.",
-            image: workImage("parageta.webp", "Parageta parametric footwear study", "old site /untitled/parageta"),
+            image: workImage("parageta.webp", "Parageta parametric footwear study", "portfolio listing thumbnail /untitled/parageta"),
             detail: {
               body: ["Parameterized Footwear Based on Oriental Culture."],
               facts: [
@@ -517,7 +519,7 @@ export const site = {
             context: "Independent",
             description:
               "An autonomous charging vehicle proposed as mobile charging infrastructure; UNESCO SDG certification (09).",
-            image: workImage("agile-charge.webp", "AGILE CHARGE mobile charging infrastructure", "old site /untitled/agile-charge"),
+            image: workImage("agile-charge.webp", "AGILE CHARGE mobile charging infrastructure", "portfolio listing thumbnail /untitled/agile-charge"),
             detail: {
               body: ["Flexible EV Charging Infrastructure Service System."],
               facts: [{ label: "Role", value: "Personal project" }],
@@ -539,18 +541,19 @@ export const site = {
   publications: {
     heading: "Publications",
     article: {
-      title: "Application and Challenges of Artificial Intelligence-Driven Manufacturing Systems in Production Line Automation",
-      author: "Ge Zehao",
-      authorNote: "(independent author)",
-      venue: "Frontiers in Artificial Intelligence and Applications (FAIA), Vol. 405, 2025 — EI Compendex indexed",
-      datePublished: "2025-04",
+      title: "Applications and Challenges of Artificial Intelligence-Driven Intelligent Manufacturing Systems in Production Line Automation",
+      author: "Zehao Ge",
+      authorNote: "Sole author, South China University of Technology.",
+      venue: "Design Studies and Intelligence Engineering: Proceedings of DSIE 2024, Hangzhou, China, December 2024. Frontiers in Artificial Intelligence and Applications, Vol. 405. IOS Press, 2025.",
+      publicationMeta: "Published April 1, 2025 · DOI: 10.3233/FAIA250343",
+      datePublished: "2025-04-01",
+      doi: "10.3233/FAIA250343",
+      summary: "Proposes an architecture for AI-driven intelligent manufacturing spanning data acquisition, intelligent perception, task scheduling, and decision support. In deployment on an automated production line, hourly output increased by 20 units and equipment utilization by 6%.",
       links: [
-        { label: "publisher", href: "https://journals.sagepub.com/doi/10.3233/FAIA250343" },
+        { label: "PDF", href: "https://journals.sagepub.com/doi/pdf/10.3233/FAIA250343?download=true" },
+        { label: "Publisher", href: "https://journals.sagepub.com/doi/10.3233/FAIA250343" },
+        { label: "DOI", href: "https://doi.org/10.3233/FAIA250343" },
       ],
-    },
-    patent: {
-      label: "Patent",
-      title: "Anti-collision device for drone flight — utility model, first inventor.",
     },
     // robotics work to be added on submission.
   },
@@ -613,7 +616,8 @@ export const site = {
       {
         institution: "University of Washington",
         degree: "M.S. in Technology Innovation (Robotics)",
-        dates: "Incoming, Fall 2026",
+        dates: "Sep 2026 – Mar 2028",
+        detail: "IELTS 7.0 · GRE 326 (V156 / Q170 / W3.5)",
       },
       {
         institution: "South China University of Technology (SCUT)",
@@ -644,21 +648,35 @@ export const site = {
       { label: "Programming", items: ["Python", "C", "JavaScript", "Ubuntu", "Git"] },
       { label: "Vehicle engineering", items: ["Cockpit engineering", "HMI", "Packaging", "Ergonomics", "Feasibility analysis"] },
       { label: "CAD & prototyping", items: ["SolidWorks", "CATIA", "3DE", "Rhino (Grasshopper)", "Unity"] },
-      { label: "Certificates", items: ["IBM Data Science", "Google IT Automation with Python", "Siemens Applied CFD"] },
+      {
+        label: "Certificates",
+        items: [
+          "IBM — Data Science (Professional Certificate) · 2025",
+          "IBM — Product Manager (Professional Certificate) · 2024",
+          "Google — IT Automation with Python (Professional Certificate) · 2024",
+          "UNESCO — United Nations Sustainable Development Goals Certificate · 2024",
+          "Wharton, University of Pennsylvania — Entrepreneurship (Specialization Certificate) · 2024",
+          "Siemens — Applied Computational Fluid Dynamics (Course Certificate) · 2024",
+        ],
+      },
     ] satisfies readonly SkillGroup[],
   },
   contact: {
-    heading: "Get in touch",
+    heading: "Connect",
+    metaTitle: "Connect — Zehao (Kai) Ge",
+    metaDescription: "Contact Zehao Ge about research collaborations and graduate opportunities in embodied AI and human–robot interaction.",
     lede: "Open to research collaborations and graduate opportunities in embodied AI and human–robot interaction.",
     profiles: [
+      { label: "CV", href: "/cv/GeZehao_CV.pdf" },
+      { label: "Google Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ" },
       { label: "GitHub", href: "https://github.com/zehao-ge" },
-      { label: "Google Scholar", href: "", todo: "TODO: add Google Scholar URL" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
     ] satisfies readonly LinkItem[],
+    backLabel: "← Back to homepage",
+    backHref: "/",
     footer: "© 2026 Zehao Ge · Last updated July 2026",
   },
   todos: [
-    "TODO: add Google Scholar URL",
     "TODO(owner): verify the division of work between Skynomad and YU9, and that naming the YU9 program publicly is acceptable",
     "TODO: replace public/cv/GeZehao_CV.pdf with a public CV that omits date of birth and phone number and states the degree exactly as Bachelor's degree in Product Design",
   ],

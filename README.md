@@ -1,4 +1,4 @@
-# Ge Zehao — academic personal website
+# Zehao (Kai) Ge — academic personal website
 
 A static academic personal website for embodied-AI, robot-learning, and human–robot interaction research.
 

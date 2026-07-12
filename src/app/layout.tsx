@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const sameAs = site.header.links.filter((profile) => profile.href.startsWith("http")).map((profile) => profile.href);
+  const sameAs = site.contact.profiles.filter((profile) => profile.href.startsWith("http")).map((profile) => profile.href);
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -52,6 +52,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     author: { "@type": "Person", name: site.identity.name },
     isPartOf: site.publications.article.venue,
     datePublished: site.publications.article.datePublished,
+    identifier: site.publications.article.doi,
+    description: site.publications.article.summary,
   };
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>

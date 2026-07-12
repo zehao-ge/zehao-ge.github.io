@@ -1,6 +1,5 @@
 import { AwardGrid } from "@/components/AwardGrid";
 import { EntityText } from "@/components/EntityText";
-import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { NewsList } from "@/components/NewsList";
 import { ProfileHeader } from "@/components/ProfileHeader";
@@ -56,7 +55,6 @@ export default function Home() {
           <div className="content-width"><Reveal><h2 id="skills-title">{site.skills.heading}</h2></Reveal><Reveal><SkillPills groups={site.skills.groups} /></Reveal></div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

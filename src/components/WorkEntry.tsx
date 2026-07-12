@@ -9,7 +9,7 @@ import { site } from "@/content/site";
 function WorkImageView({ image, number }: { image: WorkImage; number: string }) {
   const imageExists = existsSync(join(process.cwd(), "public", image.path.replace(/^\//, "")));
   return (
-    <div className="work-image">
+    <>
       {imageExists ? (
         <Image src={image.path} alt={image.alt} width={image.width} height={image.height} sizes="(max-width: 720px) 100vw, 280px" />
       ) : (
@@ -17,7 +17,8 @@ function WorkImageView({ image, number }: { image: WorkImage; number: string }) 
           <span>{number}</span>
         </div>
       )}
-    </div>
+      <div className="cover-inset" aria-hidden="true" />
+    </>
   );
 }
 
@@ -27,7 +28,7 @@ export function WorkEntry({ item }: { item: WorkItem }) {
   return (
     <article className="work-entry">
       <div className="work-media">
-        <Link className="work-media-link" href={detailHref} aria-label={`${site.ui.detail.viewProject} ${item.title}`}>
+        <Link className="work-media-link cover" href={detailHref} aria-label={`${site.ui.detail.viewProject} ${item.title}`}>
           <WorkImageView image={item.image} number={item.number} />
         </Link>
         {item.imageCaption && <p className="image-caption">{item.imageCaption}</p>}

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { EntityText } from "@/components/EntityText";
-import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { Reveal } from "@/components/Reveal";
 import { site, workItems } from "@/content/site";
@@ -154,7 +153,6 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
           </Reveal>
         </article>
       </main>
-      <Footer />
     </>
   );
 }

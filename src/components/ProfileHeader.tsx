@@ -21,7 +21,9 @@ export function ProfileHeader() {
               </div>
             )}
           </div>
-          <InlineLinkRow links={site.header.links} showTodoMarker={false} />
+          <div className="profile-link-rows">
+            {site.header.links.map((row) => <InlineLinkRow links={row} key={row[0].label} />)}
+          </div>
         </div>
         <div className="profile-copy">
           <h1 id="profile-title">

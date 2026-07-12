@@ -6,7 +6,7 @@ c = canvas.Canvas(path, pagesize=A4)
 width, height = A4
 c.setFillColorRGB(0.114, 0.114, 0.122)
 c.setFont("Helvetica-Bold", 28)
-c.drawString(64, height - 96, "Ge Zehao")
+c.drawString(64, height - 96, "Zehao (Kai) Ge")
 c.setFillColorRGB(0.431, 0.431, 0.451)
 c.setFont("Helvetica", 14)
 c.drawString(64, height - 128, "Curriculum vitae placeholder")
