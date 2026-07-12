@@ -28,7 +28,11 @@ export function WorkEntry({ item }: { item: WorkItem }) {
   return (
     <article className="work-entry">
       <div className="work-media">
-        <Link className="work-media-link cover" href={detailHref} aria-label={`${site.ui.detail.viewProject} ${item.title}`}>
+        <Link
+          className={`work-media-link cover${item.coverTone === "dark" ? " cover-dark-image" : ""}`}
+          href={detailHref}
+          aria-label={`${site.ui.detail.viewProject} ${item.title}`}
+        >
           <WorkImageView image={item.image} number={item.number} />
         </Link>
         {item.imageCaption && <p className="image-caption">{item.imageCaption}</p>}

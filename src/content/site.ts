@@ -49,6 +49,7 @@ export type WorkItem = {
   status?: string;
   description: string;
   image: WorkImage;
+  coverTone?: "dark";
   imageCaption?: string;
   detail: WorkDetail;
 };
@@ -272,6 +273,7 @@ export const site = {
             description:
               "A folding steering wheel and input-system study for high-autonomy driving: when the car drives itself, what happens to the driver's controls? Explored stowable input geometry and mode-transition interaction for a future vehicle platform.",
             image: workImage("folding-wheel.webp", "Folding steering wheel concept shown from front and three-quarter views", "owner-supplied image: ~/Desktop/Frame 121.png"),
+            coverTone: "dark",
             detail: {
               images: [],
               status: detailInPreparation,
@@ -286,6 +288,7 @@ export const site = {
             description:
               "A wearable input device using surface electromyography to turn forearm muscle activity into a control signal for spatial interaction — sensing, hardware, and interaction mapping designed end to end.",
             image: workImage("neuroware.webp", "Neuroware sEMG spatial interaction input device", "portfolio listing thumbnail /untitled/neuroware"),
+            coverTone: "dark",
             detail: {
               body: ["Neuroware is a sEMG-based spatial interaction input device."],
               facts: [
@@ -312,6 +315,7 @@ export const site = {
             context: "Independent",
             description: "The software counterpart to Neuroware: an interface system for controller-free spatial interaction.",
             image: workImage("neuro-ui.webp", "Neuro UI spatial interaction interface system", "portfolio listing thumbnail /untitled/neuro-ui"),
+            coverTone: "dark",
             detail: {
               body: ["Neuro UI is a tactile spatial interaction user interface system based on Neuroware."],
               images: [
@@ -331,6 +335,7 @@ export const site = {
             description:
               "A capstone on spatial-computing input interfaces for 3D transportation scenarios — how operators express intent in volumetric space.",
             image: workImage("spatial-capstone.webp", "Spatial computing in a 3D transportation system", "portfolio listing thumbnail; listing card href is #"),
+            coverTone: "dark",
             detail: {
               body: ["A concept project on spatial-computing input interfaces for 3D transportation systems."],
               images: [],
@@ -366,6 +371,7 @@ export const site = {
             description:
               "Data curation and classification for an industrial-design foundation model, with foundational study of CNNs and Transformers.",
             image: workImage("xiaomi-ai.webp", "Generative AI for industrial design project", "portfolio listing thumbnail /untitled/xiaomi-ai"),
+            coverTone: "dark",
             detail: {
               body: [
                 "During my internship at Xiaomi Automotive, I also contributed to the development of a generative visual model for internal use by the industrial design department.",
@@ -429,6 +435,7 @@ export const site = {
             description:
               "Collaborated with engineering teams and suppliers to bring the HyperVision panoramic cockpit display into mass production.",
             image: workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "~/Desktop/personal/website/512707016_1185639896941152_6825790499007650197_n.jpg (credit Image: Xiaomi)"),
+            coverTone: "dark",
             imageCaption: "Image: Xiaomi",
             detail: {
               images: [
@@ -518,6 +525,7 @@ export const site = {
             description:
               "An autonomous charging vehicle proposed as mobile charging infrastructure; UNESCO SDG certification (09).",
             image: workImage("agile-charge.webp", "AGILE CHARGE mobile charging infrastructure", "portfolio listing thumbnail /untitled/agile-charge"),
+            coverTone: "dark",
             detail: {
               body: ["Flexible EV Charging Infrastructure Service System."],
               facts: [{ label: "Role", value: "Personal project" }],
