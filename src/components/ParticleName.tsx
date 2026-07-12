@@ -15,6 +15,8 @@ const H1_PARTICLES = {
   accelerationRange: 0.18,
   reachBase: 28,
   reachRange: 46,
+  overhangReachBase: 80,
+  overhangReachRange: 110,
   verticalJitter: 0.15,
   reformDurationBase: 9,
   reformDurationRange: 6,

@@ -28,6 +28,8 @@ export type ParticleDissolveParameters = {
   accelerationRange: number;
   reachBase: number;
   reachRange: number;
+  overhangReachBase: number;
+  overhangReachRange: number;
   verticalJitter: number;
   reformDurationBase: number;
   reformDurationRange: number;
@@ -129,7 +131,11 @@ export function runParticleDissolve({
   const bounds = stage.getBoundingClientRect();
   const width = Math.max(1, Math.ceil(bounds.width));
   const height = Math.max(1, Math.ceil(bounds.height));
-  const canvasWidth = width + Math.ceil(parameters.reachBase + parameters.reachRange);
+  const maximumReach = Math.max(
+    parameters.reachBase + parameters.reachRange,
+    parameters.overhangReachBase + parameters.overhangReachRange,
+  );
+  const canvasWidth = width + Math.ceil(maximumReach);
   canvas.width = Math.ceil(canvasWidth * dpr);
   canvas.height = Math.ceil(height * dpr);
   canvas.style.width = `${canvasWidth}px`;
@@ -159,12 +165,20 @@ export function runParticleDissolve({
     const u = Math.min(rel, 1);
     const isOverhang = rel > 1;
     const g = 2.1 - 1.3 * u;
-    const vx = (parameters.velocityBase + Math.random() * parameters.velocityRange) * g;
-    const ax = (parameters.accelerationBase + Math.random() * parameters.accelerationRange) * g;
-    const reach = parameters.reachBase + Math.random() * parameters.reachRange;
+    const vx = isOverhang
+      ? (parameters.velocityBase * 0.7 + Math.random() * parameters.velocityRange * 0.8) * g
+      : (parameters.velocityBase + Math.random() * parameters.velocityRange) * g;
+    const ax = isOverhang
+      ? (parameters.accelerationBase * 0.8 + Math.random() * parameters.accelerationRange * 0.8) * g
+      : (parameters.accelerationBase + Math.random() * parameters.accelerationRange) * g;
+    const reach = isOverhang
+      ? parameters.overhangReachBase + Math.random() * parameters.overhangReachRange
+      : parameters.reachBase + Math.random() * parameters.reachRange;
     return {
       ...point,
-      delay: u * parameters.sweep + Math.random() * (isOverhang ? 36 : 14),
+      delay: isOverhang
+        ? parameters.sweep + (rel - 1) * parameters.sweep * 0.55 + Math.random() * 24
+        : u * parameters.sweep + Math.random() * 14,
       vx,
       vy: (Math.random() * 2 - 1) * parameters.verticalJitter,
       ax,
@@ -227,7 +241,7 @@ export function runParticleDissolve({
     dust.forEach((particle) => {
       if (elapsed < particle.delay) {
         context.globalAlpha = 1;
-        context.fillRect(particle.x, particle.y, 1, 1);
+        context.fillRect(particle.x + 0.125, particle.y + 0.125, 0.75, 0.75);
         return;
       }
       const age = (elapsed - particle.delay) / FRAME_MS;
@@ -235,7 +249,7 @@ export function runParticleDissolve({
       const opacity = Math.max(0, 1 - distance / particle.reach);
       if (opacity <= 0) return;
       context.globalAlpha = opacity;
-      context.fillRect(particle.x + distance, particle.y + particle.vy * age, 1, 1);
+      context.fillRect(particle.x + distance + 0.125, particle.y + particle.vy * age + 0.125, 0.75, 0.75);
     });
 
     reform.forEach((particle) => {
@@ -243,7 +257,7 @@ export function runParticleDissolve({
       const age = (elapsed - particle.delay) / FRAME_MS;
       const progress = Math.min(age / particle.duration, 1);
       const eased = easeOutCubic(progress);
-      const size = 1 + 0.6 * Math.sin(eased * Math.PI);
+      const size = 0.75 + 0.25 * eased * eased + 0.35 * Math.sin(eased * Math.PI);
       const x = particle.startX + (particle.x - particle.startX) * eased;
       const y = particle.startY + (particle.y - particle.startY) * eased;
       context.globalAlpha = Math.min(1, age * 0.34);

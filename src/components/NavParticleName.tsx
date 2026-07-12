@@ -14,6 +14,8 @@ const NAV_PARTICLES = {
   accelerationRange: 0.07,
   reachBase: 10,
   reachRange: 12,
+  overhangReachBase: 26,
+  overhangReachRange: 30,
   verticalJitter: 0.1,
   reformDurationBase: 8,
   reformDurationRange: 5,
