@@ -136,8 +136,9 @@ html.dark .portrait-link:active .portrait-inset { box-shadow:inset 0 0 28px 6px 
 .profile-statements strong { font-weight:600; }
 .inline-link-row { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:28px; margin-top:16px; font-size:14px; }
 .inline-link-item { display:inline-flex; gap:0; align-items:baseline; }
-.profile-link-rows { width:max-content; max-width:none; margin-top:16px; }
-.profile-link-rows .inline-link-row { flex-wrap:nowrap; width:max-content; max-width:none; justify-content:flex-start; margin-top:0; line-height:1.5; white-space:nowrap; }
+.profile-link-rows { width:fit-content; max-width:none; margin-top:16px; }
+.profile-link-rows .inline-link-row { flex-wrap:nowrap; width:fit-content; max-width:none; justify-content:flex-start; margin-top:0; line-height:1.5; white-space:nowrap; }
+.profile-link-rows .inline-link-item,.profile-link-rows .contact-link { flex:0 0 auto; }
 
 .news-list { list-style:none; margin:32px 0 0; padding:0; border-top:1px solid var(--separator); }
 .news-row { display:grid; grid-template-columns:92px minmax(0,1fr); gap:24px; padding:12px 0; border-bottom:1px solid var(--separator); font-size:15px; }
@@ -289,10 +290,10 @@ html.dark .cover:active .cover-inset { box-shadow:inset 0 0 28px 6px rgba(0,0,0,
   .profile-header { padding-top:108px; padding-bottom:48px; }
   .profile-grid { grid-template-columns:110px minmax(0,1fr); gap:16px; }
   .profile-aside { width:110px; padding-top:2px; }
-  .profile-link-rows { width:max-content; max-width:none; margin-left:0; font-size:13px; }
-  .profile-link-rows .inline-link-row { flex-wrap:nowrap; width:max-content; max-width:none; justify-content:flex-start; gap:24px; white-space:nowrap; }
+  .profile-link-rows { width:fit-content; max-width:none; margin-left:0; font-size:13px; }
+  .profile-link-rows .inline-link-row { flex-wrap:nowrap; width:fit-content; max-width:none; justify-content:flex-start; gap:24px; white-space:nowrap; }
   .profile-link-rows .inline-link-item { flex:none; }
-  .profile-link-rows .contact-link { width:44px; height:44px; justify-content:center; padding:11px; }
+  .profile-link-rows .contact-link { width:44px; height:44px; justify-content:center; margin-inline:-11px; padding:11px; }
   .profile-link-rows .inline-link-item:first-child .contact-link { margin-left:-11px; }
   .profile-link-rows .contact-icon { width:22px; height:22px; }
   .profile-link-rows .contact-label { display:none; }
