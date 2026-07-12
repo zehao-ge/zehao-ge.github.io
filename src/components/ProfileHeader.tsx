@@ -23,12 +23,12 @@ export function ProfileHeader() {
             )}
             <span className="portrait-inset" aria-hidden="true" />
           </a>
-          <div className="profile-link-rows">
-            {site.header.links.map((row) => <InlineLinkRow links={row} key={row[0].label} />)}
-          </div>
         </div>
         <div className="profile-copy">
           <ParticleName />
+          <div className="profile-link-rows">
+            <InlineLinkRow links={site.header.links} />
+          </div>
           {site.header.bio.map((paragraph) => <p className="profile-bio" key={paragraph}><EntityText text={paragraph} /></p>)}
           <div className="profile-statements">
             {site.header.statements.map((statement) => (

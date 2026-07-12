@@ -140,6 +140,14 @@ export function Nav({ connectPage = false }: { connectPage?: boolean }) {
 
   return (
     <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
+      <span
+        className="nav-glass"
+        aria-hidden="true"
+        style={{
+          backdropFilter: "var(--nav-glass-filter)",
+          WebkitBackdropFilter: "var(--nav-glass-filter)",
+        }}
+      />
       <nav className="nav-inner site-container" aria-label={site.ui.primaryNavigation}>
         <div className="nav-brand-slot">
           <a

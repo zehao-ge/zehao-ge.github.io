@@ -10,6 +10,7 @@
   --separator:rgba(0,0,0,.08);
   --pill-hover:#e8e8ed;
   --focus:#5B3FC7;
+  --nav-glass-filter:blur(24px) saturate(180%) brightness(1.02);
 }
 
 html.dark {
@@ -22,6 +23,7 @@ html.dark {
   --separator:rgba(255,255,255,.09);
   --pill-hover:#2c2c2e;
   --focus:#A78BFA;
+  --nav-glass-filter:blur(24px) saturate(200%) brightness(1.05);
 }
 
 * { box-sizing:border-box; }
@@ -51,19 +53,21 @@ h3 { margin:0; font-size:20px; font-weight:600; letter-spacing:-.01em; line-heig
 .entity-todo,.todo-inline-link { color:inherit; text-decoration:underline dotted var(--text-secondary); text-underline-offset:3px; }
 .entity-todo sup,.todo-inline-link sup { margin-left:3px; color:var(--text-secondary); font-size:8px; font-weight:600; letter-spacing:.03em; text-decoration:none; }
 
-.nav-shell { position:fixed; z-index:100; inset:0 0 auto; height:48px; border:0; background:rgba(255,255,255,.62); backdrop-filter:blur(24px) saturate(180%) brightness(1.02); -webkit-backdrop-filter:blur(24px) saturate(180%) brightness(1.02); box-shadow:inset 0 -1px 0 rgba(0,0,0,0),0 4px 16px rgba(0,0,0,.06); transition:box-shadow .2s ease; }
+.nav-shell { position:fixed; z-index:100; inset:0 0 auto; height:48px; border:0; background:transparent; box-shadow:inset 0 -1px 0 rgba(0,0,0,0),0 4px 16px rgba(0,0,0,.06); transition:box-shadow .2s ease; }
+.nav-glass { position:absolute; z-index:0; inset:0; pointer-events:none; background:rgba(255,255,255,.62); }
 .nav-shell.nav-scrolled { box-shadow:inset 0 -1px 0 rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.06); }
-html.dark .nav-shell { background:rgba(28,26,38,.55); backdrop-filter:blur(24px) saturate(200%) brightness(1.05); -webkit-backdrop-filter:blur(24px) saturate(200%) brightness(1.05); box-shadow:inset 0 -1px 0 rgba(255,255,255,0),0 6px 20px rgba(0,0,0,.28); }
+html.dark .nav-shell { box-shadow:inset 0 -1px 0 rgba(255,255,255,0),0 6px 20px rgba(0,0,0,.28); }
+html.dark .nav-glass { background:rgba(28,26,38,.55); }
 html.dark .nav-shell.nav-scrolled { box-shadow:inset 0 -1px 0 rgba(255,255,255,.05),0 6px 20px rgba(0,0,0,.28); }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
-  .nav-shell { background:rgba(255,255,255,.92); }
-  html.dark .nav-shell { background:rgba(22,22,23,.92); }
+  .nav-glass { background:rgba(255,255,255,.92); }
+  html.dark .nav-glass { background:rgba(22,22,23,.92); }
 }
 @media (prefers-reduced-transparency:reduce) {
-  .nav-shell { background:rgba(255,255,255,.92); backdrop-filter:none; -webkit-backdrop-filter:none; }
-  html.dark .nav-shell { background:rgba(22,22,23,.92); backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .nav-glass { background:rgba(255,255,255,.92); backdrop-filter:none!important; -webkit-backdrop-filter:none!important; }
+  html.dark .nav-glass { background:rgba(22,22,23,.92); }
 }
-.nav-inner { height:100%; display:flex; align-items:center; }
+.nav-inner { position:relative; z-index:1; height:100%; display:flex; align-items:center; }
 .nav-brand-slot { flex:1; display:flex; align-items:center; }
 .nav-name { display:inline-flex; width:82px; height:32px; align-items:center; padding:0 2px; margin-left:-2px; font-size:17px; font-weight:600; letter-spacing:-.01em; }
 .nav-name-switch { position:relative; display:grid; width:100%; overflow:hidden; }
@@ -100,10 +104,10 @@ html.dark .connect-pill,html.dark .skip-link { color:#000; }
 .profile-header { padding-top:72px; padding-bottom:72px; }
 .profile-grid { display:grid; grid-template-columns:150px minmax(0,1fr); gap:36px; align-items:flex-start; }
 .profile-aside { width:150px; padding-top:3px; }
-.portrait-frame,.portrait-placeholder { width:150px; aspect-ratio:1; border-radius:12px; overflow:hidden; }
+.portrait-frame,.portrait-placeholder { width:150px; aspect-ratio:1; border-radius:50%; overflow:hidden; }
 .portrait-link { position:relative; display:block; cursor:pointer; transform:scale(1); box-shadow:none; transition:transform 400ms cubic-bezier(.22,1,.36,1),box-shadow 400ms cubic-bezier(.22,1,.36,1); }
 .portrait-frame img { display:block; width:100%; height:100%; object-fit:cover; }
-.portrait-inset { position:absolute; inset:0; border-radius:12px; pointer-events:none; opacity:0; transition:opacity 400ms cubic-bezier(.22,1,.36,1),box-shadow 400ms cubic-bezier(.22,1,.36,1); }
+.portrait-inset { position:absolute; inset:0; border-radius:50%; pointer-events:none; opacity:0; transition:opacity 400ms cubic-bezier(.22,1,.36,1),box-shadow 400ms cubic-bezier(.22,1,.36,1); }
 @media (hover:hover) {
   .portrait-link:hover { transform:scale(1.04); box-shadow:none; }
   .portrait-link:hover .portrait-inset { opacity:1; box-shadow:inset 0 0 26px 5px rgba(0,0,0,.28); }
@@ -133,9 +137,8 @@ html.dark .portrait-link:active .portrait-inset { box-shadow:inset 0 0 28px 6px 
 .inline-link-row { display:flex; flex-wrap:wrap; gap:5px 8px; margin-top:16px; font-size:14px; }
 .inline-link-item { display:inline-flex; gap:0; align-items:baseline; }
 .link-separator { margin:0 4px; color:var(--text-secondary); }
-.profile-link-rows { display:grid; width:100%; gap:2px; margin-top:16px; }
-.profile-link-rows .inline-link-row { display:block; width:100%; margin-top:0; line-height:1.5; white-space:nowrap; }
-.profile-link-rows .inline-link-item { display:inline; }
+.profile-link-rows { width:fit-content; max-width:100%; margin-top:16px; }
+.profile-link-rows .inline-link-row { flex-wrap:nowrap; width:max-content; max-width:100%; margin-top:0; line-height:1.5; white-space:nowrap; }
 
 .news-list { list-style:none; margin:32px 0 0; padding:0; border-top:1px solid var(--separator); }
 .news-row { display:grid; grid-template-columns:92px minmax(0,1fr); gap:24px; padding:12px 0; border-bottom:1px solid var(--separator); font-size:15px; }
@@ -286,6 +289,7 @@ html.dark .cover:active .cover-inset { box-shadow:inset 0 0 28px 6px rgba(0,0,0,
   .profile-grid { grid-template-columns:110px minmax(0,1fr); gap:16px; }
   .profile-aside { width:110px; padding-top:2px; }
   .profile-link-rows { font-size:13px; }
+  .profile-link-rows .inline-link-row { flex-wrap:wrap; width:auto; white-space:normal; }
   .link-separator { margin:0 3px; }
   .portrait-frame,.portrait-placeholder { width:110px; }
   .profile-bio { margin-top:20px; }
