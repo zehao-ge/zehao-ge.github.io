@@ -3,14 +3,26 @@
 import { site } from "@/content/site";
 import { useParticleSwap } from "@/components/useParticleSwap";
 
-const SWEEP = 220;
-const LAG = 20;
+const NAV_PARTICLES = {
+  sweep: 260,
+  lag: 22,
+  dyingDensity: 1,
+  rebornDensity: 1,
+  velocityBase: 0.9,
+  velocityRange: 1.1,
+  accelerationBase: 0.09,
+  accelerationRange: 0.07,
+  reachBase: 10,
+  reachRange: 12,
+  verticalJitter: 0.1,
+  reformDurationBase: 8,
+  reformDurationRange: 5,
+} as const;
 
 export function NavParticleName({ targetText }: { targetText: string }) {
   const { displayedText, elementRef, stageRef, textRef, canvasRef } = useParticleSwap<HTMLSpanElement>({
     targetText,
-    sweep: SWEEP,
-    lag: LAG,
+    parameters: NAV_PARTICLES,
   });
 
   return (

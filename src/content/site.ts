@@ -1,6 +1,6 @@
 export type NavItem = { label: string; href: string };
 export type ContactIconName = "email" | "cv" | "scholar" | "github" | "linkedin";
-export type LinkItem = { label: string; href: string; todo?: string; icon?: ContactIconName };
+export type LinkItem = { label: string; href: string; ariaLabel?: string; todo?: string; icon?: ContactIconName };
 export type EntityLink = { label: string; href: string; todo?: string };
 export type NewsItem = { date: string; text: string };
 export type WorkImage = {
@@ -110,6 +110,7 @@ export const site = {
     givenName: "Zehao",
     familyName: "Ge",
     chineseName: "「葛泽昊」",
+    chineseNameBare: "葛泽昊",
     displayName: "Zehao (Kai) Ge 「葛泽昊」",
     title: "Zehao (Kai) Ge — Embodied AI & Robot Learning",
     description:
@@ -217,7 +218,7 @@ export const site = {
     ],
     links: [
       { label: "Email", href: "mailto:thehowge88@gmail.com", icon: "email" },
-      { label: "Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ", icon: "scholar" },
+      { label: "Scholar", ariaLabel: "Google Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ", icon: "scholar" },
       { label: "GitHub", href: "https://github.com/zehao-ge", icon: "github" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/", icon: "linkedin" },
     ] satisfies readonly LinkItem[],

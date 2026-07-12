@@ -35,12 +35,11 @@ export function EntityText({ text }: { text: string }) {
 export function InlineLinkRow({ links, showTodoMarker = true }: { links: readonly LinkItem[]; showTodoMarker?: boolean }) {
   return (
     <div className="inline-link-row">
-      {links.map((link, index) => (
+      {links.map((link) => (
         <span className="inline-link-item" key={link.label}>
-          {index > 0 && <span className="link-separator" aria-hidden="true">{site.ui.linkSeparator}</span>}
           {link.href ? (
-            <a className="contact-link" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
-              {link.icon && <ContactIcon name={link.icon} />}{link.label}
+            <a className="contact-link" aria-label={link.ariaLabel ?? link.label} href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+              {link.icon && <ContactIcon name={link.icon} />}<span className="contact-label">{link.label}</span>
             </a>
           ) : (
             <span className={showTodoMarker ? "todo-inline-link" : undefined} title={link.todo}>

@@ -2,18 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { runParticleDissolve, type ParticleDissolveController } from "@/components/particleDissolve";
+import {
+  runParticleDissolve,
+  type ParticleDissolveController,
+  type ParticleDissolveParameters,
+} from "@/components/particleDissolve";
 
 export function useParticleSwap<T extends HTMLElement>({
   targetText,
-  sweep,
-  lag,
+  parameters,
 }: {
   targetText: string;
-  sweep: number;
-  lag: number;
+  parameters: ParticleDissolveParameters;
 }) {
   const [displayedText, setDisplayedText] = useState(targetText);
+  const displayedTextRef = useRef(targetText);
   const elementRef = useRef<T>(null);
   const stageRef = useRef<HTMLSpanElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -22,12 +25,13 @@ export function useParticleSwap<T extends HTMLElement>({
   const animatingRef = useRef(false);
 
   useEffect(() => {
-    if (displayedText === targetText) {
+    if (displayedTextRef.current === targetText) {
       animatingRef.current = false;
       return;
     }
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      displayedTextRef.current = targetText;
       setDisplayedText(targetText);
       animatingRef.current = false;
       return;
@@ -38,6 +42,7 @@ export function useParticleSwap<T extends HTMLElement>({
     const textElement = textRef.current;
     const canvas = canvasRef.current;
     if (!element || !stage || !textElement || !canvas) {
+      displayedTextRef.current = targetText;
       setDisplayedText(targetText);
       animatingRef.current = false;
       return;
@@ -51,12 +56,12 @@ export function useParticleSwap<T extends HTMLElement>({
       stage,
       textElement,
       canvas,
-      fromText: displayedText,
+      fromText: displayedTextRef.current,
       targetText,
-      sweep,
-      lag,
+      parameters,
       onComplete: () => {
         completedSynchronously = true;
+        displayedTextRef.current = targetText;
         flushSync(() => setDisplayedText(targetText));
         animatingRef.current = false;
         controllerRef.current = null;
@@ -69,7 +74,7 @@ export function useParticleSwap<T extends HTMLElement>({
       if (controllerRef.current === controller) controllerRef.current = null;
       animatingRef.current = false;
     };
-  }, [displayedText, lag, sweep, targetText]);
+  }, [parameters, targetText]);
 
   return { displayedText, elementRef, stageRef, textRef, canvasRef, animatingRef };
 }
