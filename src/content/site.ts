@@ -109,7 +109,7 @@ export const site = {
     preferredName: "Kai Ge",
     givenName: "Zehao",
     familyName: "Ge",
-    chineseName: "葛泽昊",
+    chineseName: "「葛泽昊」",
     displayName: "Zehao (Kai) Ge 「葛泽昊」",
     title: "Zehao (Kai) Ge — Embodied AI & Robot Learning",
     description:
