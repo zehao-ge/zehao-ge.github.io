@@ -1,7 +1,13 @@
 const FRAME_MS = 1000 / 60;
 
-type Point = { x: number; y: number };
-type Sample = { points: Point[]; lo: number; hi: number; lineBottom: number };
+type Point = { x: number; y: number; coverage: number };
+type Sample = {
+  points: Point[];
+  lo: number;
+  hi: number;
+  lineBottom: number;
+  advanceWidth: number;
+};
 type DustParticle = Point & {
   delay: number;
   vx: number;
@@ -58,6 +64,7 @@ function sampleText(
   textElement: HTMLElement,
   dpr: number,
   density: number,
+  baseline: number,
 ): Sample {
   const bounds = stage.getBoundingClientRect();
   const width = Math.max(1, Math.ceil(bounds.width));
@@ -66,7 +73,9 @@ function sampleText(
   canvas.width = Math.ceil(width * dpr);
   canvas.height = Math.ceil(height * dpr);
   const context = canvas.getContext("2d", { willReadFrequently: true });
-  if (!context) return { points: [], lo: 0, hi: 0, lineBottom: height - 1 };
+  if (!context) {
+    return { points: [], lo: 0, hi: 0, lineBottom: height - 1, advanceWidth: 0 };
+  }
 
   const style = getComputedStyle(textElement);
   context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -78,9 +87,7 @@ function sampleText(
 
   const metrics = context.measureText(text);
   const fontSize = Number.parseFloat(style.fontSize) || 44;
-  const ascent = metrics.actualBoundingBoxAscent || fontSize * 0.8;
   const descent = metrics.actualBoundingBoxDescent || fontSize * 0.2;
-  const baseline = (height - ascent - descent) / 2 + ascent;
   const lineBottom = Math.min(height - 1, Math.max(0, Math.ceil(baseline + descent)));
   context.fillText(text, 0, baseline);
 
@@ -97,7 +104,7 @@ function sampleText(
       if (alpha <= 90) continue;
       lo = Math.min(lo, x);
       hi = Math.max(hi, x);
-      if (density >= 1 || Math.random() < density) points.push({ x, y });
+      if (density >= 1 || Math.random() < density) points.push({ x, y, coverage: alpha / 255 });
     }
   }
 
@@ -106,7 +113,23 @@ function sampleText(
     lo: Number.isFinite(lo) ? lo : 0,
     hi: Number.isFinite(hi) ? hi : 0,
     lineBottom,
+    advanceWidth: metrics.width,
   };
+}
+
+function measureDomBaseline(stage: HTMLElement, textElement: HTMLElement) {
+  const marker = document.createElement("span");
+  marker.setAttribute("aria-hidden", "true");
+  marker.style.display = "inline-block";
+  marker.style.width = "0";
+  marker.style.height = "0";
+  marker.style.margin = "0";
+  marker.style.padding = "0";
+  marker.style.lineHeight = "0";
+  textElement.appendChild(marker);
+  const baseline = marker.getBoundingClientRect().top - stage.getBoundingClientRect().top;
+  marker.remove();
+  return baseline;
 }
 
 export function runParticleDissolve({
@@ -121,13 +144,16 @@ export function runParticleDissolve({
 }: ParticleDissolveOptions): ParticleDissolveController {
   const previousTransition = element.style.transition;
   const previousTransform = element.style.transform;
+  const previousClipPath = textElement.style.clipPath;
+  const previousWebkitClipPath = textElement.style.getPropertyValue("-webkit-clip-path");
   element.style.transition = "none";
   element.style.transform = "scale(1)";
   void element.offsetHeight;
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const source = sampleText(fromText, stage, textElement, dpr, parameters.dyingDensity);
-  const target = sampleText(targetText, stage, textElement, dpr, parameters.rebornDensity);
+  const baseline = measureDomBaseline(stage, textElement);
+  const source = sampleText(fromText, stage, textElement, dpr, parameters.dyingDensity, baseline);
+  const target = sampleText(targetText, stage, textElement, dpr, parameters.rebornDensity, baseline);
   const bounds = stage.getBoundingClientRect();
   const width = Math.max(1, Math.ceil(bounds.width));
   const height = Math.max(1, Math.ceil(bounds.height));
@@ -210,7 +236,8 @@ export function runParticleDissolve({
   const reformFinishAt = Math.max(...reform.map((particle) => particle.delay + particle.duration * FRAME_MS));
   const finishAt = Math.max(dustFinishAt, reformFinishAt);
 
-  textElement.style.color = "transparent";
+  textElement.style.clipPath = "inset(0 0 0 0)";
+  textElement.style.setProperty("-webkit-clip-path", "inset(0 0 0 0)");
   canvas.style.opacity = "1";
   let animationFrame: number | null = null;
   let startedAt: number | null = null;
@@ -226,29 +253,43 @@ export function runParticleDissolve({
     element.style.transition = "none";
     element.style.transform = "scale(1)";
     textElement.style.color = "";
+    textElement.style.clipPath = previousClipPath;
+    textElement.style.setProperty("-webkit-clip-path", previousWebkitClipPath);
     void element.offsetHeight;
     restoreElementStyles();
+  };
+
+  const updateSourceClip = (elapsed: number) => {
+    const normalElapsed = Math.max(0, elapsed - 14);
+    let frontRel = Math.min(normalElapsed / parameters.sweep, 1);
+    if (elapsed > parameters.sweep + 14) {
+      const overhangElapsed = Math.max(0, elapsed - parameters.sweep - 24);
+      frontRel = 1 + overhangElapsed / (parameters.sweep * 0.55);
+    }
+    const sourceRightEdge = Math.min(width, Math.ceil(source.advanceWidth) + 1);
+    const frontX = Math.min(sourceRightEdge, source.lo + spanFront * frontRel);
+    const clipLeft = Math.max(0, Math.min(width, frontX));
+    const clip = `inset(0 0 0 ${clipLeft}px)`;
+    textElement.style.clipPath = clip;
+    textElement.style.setProperty("-webkit-clip-path", clip);
   };
 
   const render = (timestamp: number) => {
     if (cancelled) return;
     startedAt ??= timestamp;
     const elapsed = timestamp - startedAt;
+    updateSourceClip(elapsed);
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
     context.clearRect(0, 0, canvasWidth, height);
     context.fillStyle = color;
 
     dust.forEach((particle) => {
-      if (elapsed < particle.delay) {
-        context.globalAlpha = 1;
-        context.fillRect(particle.x + 0.125, particle.y + 0.125, 0.75, 0.75);
-        return;
-      }
+      if (elapsed < particle.delay) return;
       const age = (elapsed - particle.delay) / FRAME_MS;
       const distance = particle.vx * age + 0.5 * particle.ax * age * age;
       const opacity = Math.max(0, 1 - distance / particle.reach);
       if (opacity <= 0) return;
-      context.globalAlpha = opacity;
+      context.globalAlpha = opacity * particle.coverage;
       context.fillRect(particle.x + distance + 0.125, particle.y + particle.vy * age + 0.125, 0.75, 0.75);
     });
 
@@ -260,7 +301,7 @@ export function runParticleDissolve({
       const size = 0.75 + 0.25 * eased * eased + 0.35 * Math.sin(eased * Math.PI);
       const x = particle.startX + (particle.x - particle.startX) * eased;
       const y = particle.startY + (particle.y - particle.startY) * eased;
-      context.globalAlpha = Math.min(1, age * 0.34);
+      context.globalAlpha = Math.min(1, age * 0.34) * particle.coverage;
       context.fillRect(x - (size - 1) / 2, y - (size - 1) / 2, size, size);
     });
     context.globalAlpha = 1;
