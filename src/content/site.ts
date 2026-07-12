@@ -215,19 +215,14 @@ export const site = {
         text: "Embodied AI, robot learning, human–robot interaction, mobile manipulation.",
       },
     ],
-    email: {
-      label: "Email:",
-      address: "thehowge88@gmail.com",
-      href: "mailto:thehowge88@gmail.com",
-    },
     links: [
       [
-        { label: "Email", href: "mailto:thehowge88@gmail.com" },
-        { label: "Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ" },
+        { label: "Email", href: "mailto:thehowge88@gmail.com", icon: "email" },
+        { label: "Scholar", href: "https://scholar.google.com/citations?user=RiJNvesAAAAJ", icon: "scholar" },
       ],
       [
-        { label: "GitHub", href: "https://github.com/zehao-ge" },
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/" },
+        { label: "GitHub", href: "https://github.com/zehao-ge", icon: "github" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/zehao-ge-7a7a88296/", icon: "linkedin" },
       ],
     ] satisfies readonly (readonly LinkItem[])[],
   },

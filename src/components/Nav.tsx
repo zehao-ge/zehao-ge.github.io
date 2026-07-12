@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
+import { NavParticleName } from "@/components/NavParticleName";
+import { useNameLanguage } from "@/components/NameLanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
 
 type LineCoordinates = readonly [x1: number, y1: number, x2: number, y2: number];
@@ -38,6 +40,8 @@ function setLineCoordinates(line: SVGLineElement | null, coordinates: LineCoordi
 export function Nav({ connectPage = false }: { connectPage?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, hovering, setHovering } = useNameLanguage();
+  const navWordmark = lang === "en" ? site.identity.chineseName : site.identity.navWordmark;
   const headerRef = useRef<HTMLElement>(null);
   const iconRef = useRef<SVGSVGElement>(null);
   const lineOneRef = useRef<SVGLineElement>(null);
@@ -138,9 +142,15 @@ export function Nav({ connectPage = false }: { connectPage?: boolean }) {
     <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
       <nav className="nav-inner site-container" aria-label={site.ui.primaryNavigation}>
         <div className="nav-brand-slot">
-          <a className="nav-name" href={site.ui.homeHref} onClick={() => setOpen(false)} aria-label={site.identity.navWordmark}>
+          <a
+            className={`nav-name${hovering ? " nav-name-hovering" : ""}`}
+            href={site.ui.homeHref}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
+            onClick={() => { setOpen(false); setHovering(false); }}
+          >
             <span className="nav-name-switch">
-              <span className="nav-name-rest">{site.identity.navWordmark}</span>
+              <NavParticleName targetText={navWordmark} />
               <span className="nav-name-hover" aria-hidden="true">{site.ui.home}</span>
             </span>
           </a>

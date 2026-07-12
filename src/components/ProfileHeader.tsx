@@ -37,9 +37,6 @@ export function ProfileHeader() {
               </p>
             ))}
           </div>
-          <p className="profile-email">
-            {site.header.email.label}{" "}<a href={site.header.email.href}>{site.header.email.address}</a>
-          </p>
         </div>
       </div>
     </section>

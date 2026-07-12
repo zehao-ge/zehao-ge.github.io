@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { site } from "@/content/site";
+import { NameLanguageProvider } from "@/components/NameLanguageContext";
 import { ThemeScript } from "@/components/ThemeScript";
 import "./globals.css";
 
@@ -66,7 +67,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <link rel="icon" href="/favicon.svg" />
       </head>
       <body id="top">
-        {children}
+        <NameLanguageProvider>{children}</NameLanguageProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([person, article]) }} />
       </body>
     </html>

@@ -1,4 +1,5 @@
-import { site, type EntityLink } from "@/content/site";
+import { ContactIcon } from "@/components/ContactIcon";
+import { site, type EntityLink, type LinkItem } from "@/content/site";
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -31,15 +32,15 @@ export function EntityText({ text }: { text: string }) {
   );
 }
 
-export function InlineLinkRow({ links, showTodoMarker = true }: { links: readonly { label: string; href: string; todo?: string }[]; showTodoMarker?: boolean }) {
+export function InlineLinkRow({ links, showTodoMarker = true }: { links: readonly LinkItem[]; showTodoMarker?: boolean }) {
   return (
     <div className="inline-link-row">
       {links.map((link, index) => (
         <span className="inline-link-item" key={link.label}>
           {index > 0 && <span className="link-separator" aria-hidden="true">{site.ui.linkSeparator}</span>}
           {link.href ? (
-            <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
-              {link.label}
+            <a className="contact-link" href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+              {link.icon && <ContactIcon name={link.icon} />}{link.label}
             </a>
           ) : (
             <span className={showTodoMarker ? "todo-inline-link" : undefined} title={link.todo}>
