@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
 import { EntityText, InlineLinkRow } from "@/components/EntityText";
+import { ParticleName } from "@/components/ParticleName";
 import { site } from "@/content/site";
 
 export function ProfileHeader() {
@@ -26,9 +27,7 @@ export function ProfileHeader() {
           </div>
         </div>
         <div className="profile-copy">
-          <h1 id="profile-title">
-            <span className="profile-name-unit">{site.header.heading}</span>
-          </h1>
+          <ParticleName />
           {site.header.bio.map((paragraph) => <p className="profile-bio" key={paragraph}><EntityText text={paragraph} /></p>)}
           <div className="profile-statements">
             {site.header.statements.map((statement) => (

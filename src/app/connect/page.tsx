@@ -18,7 +18,7 @@ export default function ConnectPage() {
   return (
     <>
       <a className="skip-link" href="#connect-content">{site.ui.skip}</a>
-      <Nav />
+      <Nav connectPage />
       <main id="connect-content" className="connect-main">
         <ConnectContent />
       </main>

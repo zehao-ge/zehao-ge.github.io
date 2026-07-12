@@ -35,7 +35,7 @@ function setLineCoordinates(line: SVGLineElement | null, coordinates: LineCoordi
   line.setAttribute("y2", String(y2));
 }
 
-export function Nav() {
+export function Nav({ connectPage = false }: { connectPage?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -137,7 +137,12 @@ export function Nav() {
   return (
     <header ref={headerRef} className={`nav-shell${scrolled ? " nav-scrolled" : ""}`}>
       <nav className="nav-inner" aria-label={site.ui.primaryNavigation}>
-        <a className="nav-name" href="#top" onClick={() => setOpen(false)}>{site.identity.navWordmark}</a>
+        <a className="nav-name" href={site.ui.homeHref} onClick={() => setOpen(false)} aria-label={site.identity.navWordmark}>
+          <span className="nav-name-switch">
+            <span className="nav-name-rest">{site.identity.navWordmark}</span>
+            <span className="nav-name-hover" aria-hidden="true">{site.ui.home}</span>
+          </span>
+        </a>
         <div id="mobile-navigation" className={`nav-links${open ? " nav-links-open" : ""}`}>
           {site.navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
@@ -147,7 +152,7 @@ export function Nav() {
         </div>
         <div className="nav-actions">
           <ThemeToggle />
-          <a className="connect-pill" href="/connect">{site.ui.connect}</a>
+          <a className="connect-pill" href={connectPage ? "/" : "/connect"}>{connectPage ? site.ui.home : site.ui.connect}</a>
           <button className="menu-toggle" type="button" onClick={() => setOpen((current) => !current)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? site.ui.menuClose : site.ui.menuOpen}>
             <svg ref={iconRef} className="menu-icon" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true" focusable="false">
               <line ref={lineOneRef} stroke="currentColor" strokeWidth="2" strokeLinecap="round" x1="18" y1="22" x2="46" y2="22" />

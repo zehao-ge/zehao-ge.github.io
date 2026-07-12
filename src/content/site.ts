@@ -104,7 +104,7 @@ const detailInPreparation = "Detail page in preparation.";
 export const site = {
   identity: {
     name: "Zehao Ge",
-    navWordmark: "「葛泽昊」",
+    navWordmark: "Zehao Ge",
     preferredName: "Kai Ge",
     givenName: "Zehao",
     familyName: "Ge",
@@ -131,6 +131,10 @@ export const site = {
     darkMode: "Use dark mode",
     toggleTheme: "Toggle color theme",
     connect: "Connect",
+    home: "Home",
+    homeHref: "/#top",
+    nameToggleToChinese: "Show Chinese name",
+    nameToggleToEnglish: "Show English name",
     showMore: "Show more ›",
     showLess: "Show less",
     copyEmail: "Copy email address",
