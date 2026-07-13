@@ -163,10 +163,17 @@ export function Nav({ connectPage = false }: { connectPage?: boolean }) {
             </span>
           </a>
         </div>
-        <div id="mobile-navigation" className={`nav-links${open ? " nav-links-open" : ""}`}>
+        <div
+          id="mobile-navigation"
+          className={`nav-links${open ? " nav-links-open" : ""}`}
+          style={{
+            backdropFilter: "var(--nav-glass-filter)",
+            WebkitBackdropFilter: "var(--nav-glass-filter)",
+          }}
+        >
           {site.navigation.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
-              {item.label}
+              <span className="nav-link-label">{item.label}</span>
             </a>
           ))}
         </div>

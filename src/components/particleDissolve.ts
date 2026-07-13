@@ -161,7 +161,15 @@ export function runParticleDissolve({
     parameters.reachBase + parameters.reachRange,
     parameters.overhangReachBase + parameters.overhangReachRange,
   );
-  const canvasWidth = width + Math.ceil(maximumReach);
+  const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+  const visibleWidthFromStage = Math.max(
+    width,
+    Math.floor(viewportWidth - Math.max(0, bounds.left)),
+  );
+  const canvasWidth = Math.max(
+    width,
+    Math.min(width + Math.ceil(maximumReach), visibleWidthFromStage),
+  );
   canvas.width = Math.ceil(canvasWidth * dpr);
   canvas.height = Math.ceil(height * dpr);
   canvas.style.width = `${canvasWidth}px`;
