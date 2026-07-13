@@ -311,23 +311,23 @@ html.dark .cover-dark-image:active .cover-inset {
   .site-container { width:min(100% - 32px,980px); }
   .section { padding:44px 0; }
   .profile-header { padding-top:108px; padding-bottom:48px; }
-  .profile-grid { grid-template-columns:72px minmax(0,1fr); gap:12px; }
-  .profile-aside { width:72px; padding-top:2px; }
-  .profile-link-rows { width:fit-content; max-width:none; margin-top:2px; margin-left:0; font-size:13px; }
+  .profile-grid { grid-template-columns:82px minmax(0,1fr); gap:12px; }
+  .profile-aside { width:82px; padding-top:2px; }
+  .profile-link-rows { width:fit-content; max-width:none; margin-top:2px; margin-left:4px; font-size:13px; }
   .profile-link-rows .inline-link-row { flex-wrap:nowrap; width:fit-content; max-width:none; justify-content:flex-start; gap:22px; white-space:nowrap; }
   .profile-link-rows .inline-link-item { flex:none; }
   .profile-link-rows .contact-link { width:44px; height:44px; justify-content:center; margin-inline:-12px; padding:12px; }
   .profile-link-rows .inline-link-item:first-child .contact-link { margin-left:-12px; }
   .profile-link-rows .contact-icon { width:20px; height:20px; }
   .profile-link-rows .contact-label { display:none; }
-  .portrait-frame,.portrait-placeholder { width:72px; }
+  .portrait-frame,.portrait-placeholder { width:82px; }
   .profile-bio { margin-top:20px; font-size:14px; line-height:1.55; }
   .profile-link-rows+.profile-bio { margin-top:2px; }
   .profile-copy,.profile-bio,.profile-statements { min-width:0; }
   .profile-copy { font-size:14px; line-height:1.55; }
   .profile-statements { margin-top:24px; }
   .news-list { margin-top:24px; }
-  .news-row { grid-template-columns:72px minmax(0,1fr); gap:12px; font-size:14px; }
+  .news-row { grid-template-columns:82px minmax(0,1fr); gap:12px; font-size:14px; }
   .work-framing { font-size:17px; }
   .work-group { margin-top:48px; }
   .work-entry { grid-template-columns:1fr; gap:20px; padding:24px 0; }
