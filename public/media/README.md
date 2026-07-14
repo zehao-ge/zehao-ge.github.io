@@ -17,7 +17,7 @@ Place owner-supplied WebP files at the exact paths below. Keep every file at or 
 | `public/media/work/seb.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/seb` |
 | `public/media/work/skynomad.webp` | 1120 × 630 | `~/Desktop/personal/website/78ceda912861c5263ab8a3bb08188de4.jpg`; credit `Image: Xiaomi` |
 | `public/media/work/yu7-hypervision.webp` | 1120 × 630 | `~/Desktop/personal/website/512707016_1185639896941152_6825790499007650197_n.jpg`; credit `Image: Xiaomi` |
-| `public/media/work/su7-duct.webp` | 1120 × 630 | Owner-supplied `codex-clipboard-fdceabdc-c0b7-4ee8-ad4e-79999f010e23.png`; keep the engineering-connection caption in `src/content/site.ts` |
+| `public/media/work/su7-duct.webp` | 1120 × 630 | `~/Desktop/Group 3.png`; keep the engineering-connection caption in `src/content/site.ts` |
 | `public/media/work/midea.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/midea` |
 | `public/media/work/parageta.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/parageta` |
 | `public/media/work/agile-charge.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/agile-charge` |

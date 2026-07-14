@@ -494,7 +494,7 @@ export const site = {
             context: "Industry",
             status: "Shipped",
             description: "Engineering delivery of the functional front air-duct system on the SU7 Ultra.",
-            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "owner-supplied image: codex-clipboard-fdceabdc-c0b7-4ee8-ad4e-79999f010e23.png (credit Image: Xiaomi)"),
+            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "owner-supplied image: ~/Desktop/Group 3.png (credit Image: Xiaomi)"),
             coverTone: "dark",
             detail: {
               images: [],
