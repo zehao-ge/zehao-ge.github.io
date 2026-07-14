@@ -146,7 +146,7 @@ html.dark .portrait-link:active .portrait-inset { box-shadow:inset 0 0 28px 6px 
 .news-row p { margin:0; }
 
 .work-framing { max-width:720px; margin:16px 0 0; color:var(--text-secondary); font-size:19px; line-height:1.45; }
-.work-framing span+span::before { content:" "; }
+.work-framing span { display:block; }
 .work-group { margin-top:64px; }
 .work-group-heading { padding-bottom:12px; border-bottom:1px solid var(--text); }
 .work-group-title { font-size:15px; letter-spacing:.01em; }
@@ -332,8 +332,6 @@ html.dark .cover-dark-image:active .cover-inset {
   .news-list { margin-top:24px; }
   .news-row { grid-template-columns:82px minmax(0,1fr); gap:12px; font-size:14px; }
   .work-framing { font-size:17px; line-height:1.45; }
-  .work-framing span { display:block; }
-  .work-framing span+span::before { content:none; }
   .work-group-description { font-size:12px; line-height:1.4; }
   .work-group { margin-top:48px; }
   .work-entry { grid-template-columns:1fr; gap:20px; padding:24px 0; }

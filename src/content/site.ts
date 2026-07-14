@@ -239,7 +239,7 @@ export const site = {
   },
   work: {
     heading: "Selected Work",
-    framing: ["Interfaces are downstream of architecture.", "I work from the bottom up."],
+    framing: ["From vehicles to robotics,", "I build systems that extend human agency."],
     groups: [
       {
         heading: "Interfaces",
