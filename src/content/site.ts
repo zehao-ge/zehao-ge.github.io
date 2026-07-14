@@ -35,6 +35,7 @@ export type WorkDetail = {
   facts?: readonly WorkDetailFact[];
   images: readonly WorkDetailImage[];
   video?: WorkDetailVideo;
+  videos?: readonly WorkDetailVideo[];
   relatedLinks?: readonly LinkItem[];
   externalLinks?: readonly LinkItem[];
   todo?: string;
@@ -263,7 +264,7 @@ export const site = {
           },
           {
             slug: "folding-wheel",
-            number: "8",
+            number: "10",
             title: "Folding Steering Wheel for Autonomous Driving — Xiaomi EV",
             year: "2024–2026",
             context: "Industry",
@@ -279,7 +280,7 @@ export const site = {
           },
           {
             slug: "neuroware",
-            number: "10",
+            number: "12",
             title: "Neuroware — sEMG Spatial Interaction Input Device",
             year: "2024",
             context: "Independent",
@@ -307,7 +308,7 @@ export const site = {
           },
           {
             slug: "neuro-ui",
-            number: "11",
+            number: "13",
             title: "Neuro UI — Spatial Interaction Interface System",
             year: "2024",
             context: "Independent",
@@ -325,7 +326,7 @@ export const site = {
           },
           {
             slug: "spatial-capstone",
-            number: "12",
+            number: "14",
             title: "Spatial Interaction Input for 3D Transportation Systems",
             year: "2024–2025",
             context: "Academic",
@@ -346,15 +347,40 @@ export const site = {
         heading: "Robots & AI",
         items: [
           {
-            slug: "pipeline",
+            slug: "robot-head-design",
             number: "2",
-            title: "End-to-End Imitation Learning on Real Hardware",
+            title: "Robot Head — Mechanical and Interaction Design",
             year: "2026",
             context: "Research",
-            status: "Built",
-            description:
-              "A complete pipeline on SO-ARM 101, OpenArm, a mecanum-wheel mobile base, and LeRobot: calibration, leader–follower teleoperation, demonstration collection, ACT policy training, real-robot evaluation.",
-            image: workImage("pipeline.webp", "End-to-end imitation learning hardware pipeline", "~/Desktop/Tsinghua/270059ea35579b4d5a2e0f0913366631.jpg"),
+            description: "Mechanical and interaction design for a robot head.",
+            image: workImage("robot-head-design.webp", "In Progress", "Designed status placeholder"),
+            coverTone: "dark",
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
+          },
+          {
+            slug: "openarm-pico4-teleoperation",
+            number: "3",
+            title: "OpenArm Teleoperation with PICO 4",
+            year: "2026",
+            context: "Research",
+            description: "Teleoperation of OpenArm using a PICO 4 headset.",
+            image: workImage("openarm-pico4-teleoperation.webp", "OpenArm bimanual robot arms used for PICO 4 teleoperation", "https://docs.openarm.dev/1.0/"),
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
+          },
+          {
+            slug: "soarm101-grasp-training",
+            number: "4",
+            title: "SO-ARM 101 Teleoperation and Autonomous Grasping Training",
+            year: "2026",
+            context: "Research",
+            description: "SO-ARM 101 teleoperation and training for an autonomous grasping task.",
+            image: workImage("soarm101-grasp-training.webp", "SO-ARM 101 robot arm used for teleoperation and autonomous grasping training", "https://github.com/TheRobotStudio/SO-ARM100"),
             detail: {
               images: [],
               status: detailInPreparation,
@@ -362,7 +388,7 @@ export const site = {
           },
           {
             slug: "xiaomi-ai",
-            number: "7",
+            number: "9",
             title: "Generative AI for Industrial Design — Xiaomi",
             year: "2024–2025",
             context: "Industry",
@@ -382,7 +408,7 @@ export const site = {
           },
           {
             slug: "seb",
-            number: "15",
+            number: "17",
             title: "Seb — Modular Robotic Vacuum Cleaner",
             year: "2023",
             context: "Independent",
@@ -404,7 +430,7 @@ export const site = {
         items: [
           {
             slug: "digital-cabin-2027",
-            number: "3",
+            number: "5",
             title: "Digital Cabin Engineering — 2027 Vehicle Program",
             year: "2027",
             context: "Industry",
@@ -418,7 +444,7 @@ export const site = {
           },
           {
             slug: "skynomad",
-            number: "4",
+            number: "6",
             title: "Skynomad Digital Cabin Engineering — Xiaomi EV",
             year: "2025–2026",
             context: "Industry",
@@ -438,7 +464,7 @@ export const site = {
           },
           {
             slug: "yu7-hypervision",
-            number: "5",
+            number: "7",
             title: "HyperVision Panoramic Display — Xiaomi YU7",
             year: "2025",
             context: "Industry",
@@ -462,21 +488,35 @@ export const site = {
           },
           {
             slug: "su7-duct",
-            number: "6",
+            number: "8",
             title: "Functional Air Duct System — Xiaomi SU7 Ultra",
             year: "2025",
             context: "Industry",
             status: "Shipped",
             description: "Engineering delivery of the functional front air-duct system on the SU7 Ultra.",
-            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "~/Desktop/personal/website/xiaomi-su7-ultra-prototype_100937238.jpg (credit Image: Xiaomi)"),
+            image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "owner-supplied image: codex-clipboard-fdceabdc-c0b7-4ee8-ad4e-79999f010e23.png (credit Image: Xiaomi)"),
+            coverTone: "dark",
             detail: {
               images: [],
-              status: detailInPreparation,
+              videos: [
+                {
+                  embedUrl: "https://www.youtube-nocookie.com/embed/aQKKLMwSGHQ",
+                  title: "Xiaomi SU7 Ultra functional air duct video 1",
+                  linkLabel: "Watch video 1 on YouTube ›",
+                  linkHref: "https://www.youtube.com/watch?v=aQKKLMwSGHQ",
+                },
+                {
+                  embedUrl: "https://www.youtube-nocookie.com/embed/I2EjtbqkZIU",
+                  title: "Xiaomi SU7 Ultra functional air duct video 2",
+                  linkLabel: "Watch video 2 on YouTube ›",
+                  linkHref: "https://www.youtube.com/watch?v=I2EjtbqkZIU",
+                },
+              ],
             },
           },
           {
             slug: "midea",
-            number: "9",
+            number: "11",
             title: "1㎡ Integrated Cooking Center — Midea",
             year: "2024",
             context: "Sponsored",
@@ -502,7 +542,7 @@ export const site = {
           },
           {
             slug: "parageta",
-            number: "14",
+            number: "16",
             title: "Parageta — Parametric Structural Optimization in Footwear",
             year: "2023",
             context: "Independent",
@@ -527,7 +567,7 @@ export const site = {
           },
           {
             slug: "agile-charge",
-            number: "13",
+            number: "15",
             title: "AGILE CHARGE — Mobile Charging Infrastructure",
             year: "2024",
             context: "Independent",
@@ -556,7 +596,7 @@ export const site = {
       {
         heading: "Projects at Tsinghua University",
         description: "From Vehicle Engineering to Robotics.",
-        slugs: ["foot-interface", "pipeline"],
+        slugs: ["foot-interface", "robot-head-design", "openarm-pico4-teleoperation", "soarm101-grasp-training"],
       },
       {
         heading: "Projects at Xiaomi Auto",
@@ -570,7 +610,7 @@ export const site = {
       },
       {
         heading: "Undergraduate Projects",
-        description: "A solid foundation in HCI.",
+        description: "A solid foundation in HCI & Product Engineering.",
         slugs: ["neuroware", "neuro-ui", "spatial-capstone", "agile-charge", "parageta", "seb"],
       },
     ] satisfies readonly WorkDisplayGroup[],

@@ -47,6 +47,7 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
   const project = workItems[projectIndex];
   const previous = workItems[projectIndex - 1];
   const next = workItems[projectIndex + 1];
+  const detailVideos = project.detail.videos ?? (project.detail.video ? [project.detail.video] : []);
 
   return (
     <>
@@ -100,23 +101,23 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
             </Reveal>
           )}
 
-          {!project.detail.status && project.detail.video && (
-            <Reveal>
+          {!project.detail.status && detailVideos.map((video) => (
+            <Reveal key={video.linkHref}>
               <section className="detail-video">
                 <div className="detail-video-frame">
                   <iframe
-                    src={project.detail.video.embedUrl}
-                    title={project.detail.video.title}
+                    src={video.embedUrl}
+                    title={video.title}
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   />
                 </div>
-                <a className="text-link detail-video-link" href={project.detail.video.linkHref} target="_blank" rel="noopener noreferrer">{project.detail.video.linkLabel}</a>
+                <a className="text-link detail-video-link" href={video.linkHref} target="_blank" rel="noopener noreferrer">{video.linkLabel}</a>
               </section>
             </Reveal>
-          )}
+          ))}
 
           {!project.detail.status && project.detail.images.length > 0 && (
             <section className="detail-gallery" aria-labelledby="detail-gallery-title">
