@@ -8,7 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { SkillPills } from "@/components/SkillPills";
 import { Timeline } from "@/components/Timeline";
 import { WorkEntry } from "@/components/WorkEntry";
-import { site } from "@/content/site";
+import { site, workDisplayGroups } from "@/content/site";
 
 export default function Home() {
   return (
@@ -25,10 +25,20 @@ export default function Home() {
         </section>
         <section id="work" className="section" aria-labelledby="work-title">
           <div className="site-container">
-            <Reveal><h2 id="work-title">{site.work.heading}</h2><p className="work-framing">{site.work.framing}</p></Reveal>
-            {site.work.groups.map((group) => (
+            <Reveal>
+              <h2 id="work-title">{site.work.heading}</h2>
+              <p className="work-framing">
+                {site.work.framing.map((sentence) => <span key={sentence}>{sentence}</span>)}
+              </p>
+            </Reveal>
+            {workDisplayGroups.map((group) => (
               <section className="work-group" aria-labelledby={`work-group-${group.heading.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`} key={group.heading}>
-                <Reveal><h3 className="work-group-title" id={`work-group-${group.heading.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}>{group.heading}</h3></Reveal>
+                <Reveal>
+                  <div className="work-group-heading">
+                    <h3 className="work-group-title" id={`work-group-${group.heading.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}>{group.heading}</h3>
+                    {group.description && <p className="work-group-description">{group.description}</p>}
+                  </div>
+                </Reveal>
                 <div className="work-list">{group.items.map((item) => <Reveal key={item.number}><WorkEntry item={item} /></Reveal>)}</div>
               </section>
             ))}

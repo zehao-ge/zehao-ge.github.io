@@ -53,7 +53,8 @@ export type WorkItem = {
   imageCaption?: string;
   detail: WorkDetail;
 };
-export type WorkGroup = { heading: string; items: readonly WorkItem[] };
+export type WorkGroup = { heading: string; description?: string; items: readonly WorkItem[] };
+export type WorkDisplayGroup = { heading: string; description: string; slugs: readonly string[] };
 export type ExperienceItem = {
   organization: string;
   role: string;
@@ -238,7 +239,7 @@ export const site = {
   },
   work: {
     heading: "Selected Work",
-    framing: "Interfaces are downstream of architecture. I work from the bottom up.",
+    framing: ["Interfaces are downstream of architecture.", "I work from the bottom up."],
     groups: [
       {
         heading: "Interfaces",
@@ -249,11 +250,9 @@ export const site = {
             title: "Foot-Operated Locomotion Interface for Whole-Body Teleoperation",
             year: "2026",
             context: "Research",
-            status: "In development — physical prototype expected Sept 2026",
             description:
               "A foot-operated interface for omnidirectional mobile bases — foot-to-robot motion mapping, shared control, velocity control, haptic feedback — so an operator can drive the robot continuously while both hands run dual-arm teleoperation. I study its effect on teleoperation fluency, operational safety, and demonstration quality.",
             image: workImage("foot-interface.webp", "Foot-operated locomotion interface concept visualization", "owner's desktop: ~/Desktop/GPT images/Frame 3.png"),
-            imageCaption: "Concept visualization",
             detail: {
               images: [
                 detailImage("foot-interface", "01", "Concept visualization of a foot-operated interface controlling a mobile dual-arm robot", "Concept visualization", 1600, 901),
@@ -261,11 +260,10 @@ export const site = {
                 detailImage("foot-interface", "03", "Concept visualization showing the degree-of-freedom mapping for the foot interface", "Concept visualization", 1600, 900),
               ],
             },
-            // replace with prototype photos in Sept 2026, then remove caption.
           },
           {
             slug: "folding-wheel",
-            number: "2",
+            number: "8",
             title: "Folding Steering Wheel for Autonomous Driving — Xiaomi EV",
             year: "2024–2026",
             context: "Industry",
@@ -281,7 +279,7 @@ export const site = {
           },
           {
             slug: "neuroware",
-            number: "3",
+            number: "10",
             title: "Neuroware — sEMG Spatial Interaction Input Device",
             year: "2024",
             context: "Independent",
@@ -309,7 +307,7 @@ export const site = {
           },
           {
             slug: "neuro-ui",
-            number: "4",
+            number: "11",
             title: "Neuro UI — Spatial Interaction Interface System",
             year: "2024",
             context: "Independent",
@@ -327,7 +325,7 @@ export const site = {
           },
           {
             slug: "spatial-capstone",
-            number: "5",
+            number: "12",
             title: "Spatial Interaction Input for 3D Transportation Systems",
             year: "2024–2025",
             context: "Academic",
@@ -349,7 +347,7 @@ export const site = {
         items: [
           {
             slug: "pipeline",
-            number: "6",
+            number: "2",
             title: "End-to-End Imitation Learning on Real Hardware",
             year: "2026",
             context: "Research",
@@ -384,7 +382,7 @@ export const site = {
           },
           {
             slug: "seb",
-            number: "8",
+            number: "15",
             title: "Seb — Modular Robotic Vacuum Cleaner",
             year: "2023",
             context: "Independent",
@@ -405,21 +403,34 @@ export const site = {
         heading: "Products & Engineering",
         items: [
           {
+            slug: "digital-cabin-2027",
+            number: "3",
+            title: "Digital Cabin Engineering — 2027 Vehicle Program",
+            year: "2027",
+            context: "Industry",
+            description: "Digital cabin engineering for a Xiaomi Auto vehicle scheduled to launch in 2027.",
+            image: workImage("digital-cabin-2027.webp", "Confidential Xiaomi Auto digital cabin engineering project", "Designed confidentiality placeholder"),
+            coverTone: "dark",
+            detail: {
+              images: [],
+              status: detailInPreparation,
+            },
+          },
+          {
             slug: "skynomad",
-            number: "9",
-            title: "Skynomad Smart Cockpit — Xiaomi EV",
+            number: "4",
+            title: "Skynomad Digital Cabin Engineering — Xiaomi EV",
             year: "2025–2026",
             context: "Industry",
             status: "Shipped",
             description:
-              "Smart-cockpit engineering for the Xiaomi Skynomad, released 2026 — translating styling and HMI concepts into mass-producible, human-centered structures.",
+              "Digital-cabin engineering for the Xiaomi Skynomad, released 2026 — translating styling and HMI concepts into mass-producible, human-centered structures.",
             image: workImage("skynomad.webp", "Xiaomi Skynomad cockpit interior", "~/Desktop/personal/website/78ceda912861c5263ab8a3bb08188de4.jpg (credit Image: Xiaomi)"),
-            imageCaption: "Image: Xiaomi",
             detail: {
               images: [],
               video: {
                 embedUrl: "https://www.youtube-nocookie.com/embed/95y0YSBQsz4",
-                title: "Skynomad smart cockpit video",
+                title: "Skynomad digital cabin engineering video",
                 linkLabel: "Watch on YouTube ›",
                 linkHref: "https://www.youtube.com/shorts/95y0YSBQsz4",
               },
@@ -427,7 +438,7 @@ export const site = {
           },
           {
             slug: "yu7-hypervision",
-            number: "10",
+            number: "5",
             title: "HyperVision Panoramic Display — Xiaomi YU7",
             year: "2025",
             context: "Industry",
@@ -436,7 +447,6 @@ export const site = {
               "Collaborated with engineering teams and suppliers to bring the HyperVision panoramic cockpit display into mass production.",
             image: workImage("yu7-hypervision.webp", "Xiaomi YU7 HyperVision panoramic display", "~/Desktop/personal/website/512707016_1185639896941152_6825790499007650197_n.jpg (credit Image: Xiaomi)"),
             coverTone: "dark",
-            imageCaption: "Image: Xiaomi",
             detail: {
               images: [
                 detailImage("yu7-hypervision", "01", "Xiaomi HyperVision panoramic display across the YU7 cockpit", "Image: Xiaomi", 1270, 540),
@@ -452,14 +462,13 @@ export const site = {
           },
           {
             slug: "su7-duct",
-            number: "11",
+            number: "6",
             title: "Functional Air Duct System — Xiaomi SU7 Ultra",
             year: "2025",
             context: "Industry",
             status: "Shipped",
             description: "Engineering delivery of the functional front air-duct system on the SU7 Ultra.",
             image: workImage("su7-duct.webp", "Xiaomi SU7 Ultra functional front air-duct system", "~/Desktop/personal/website/xiaomi-su7-ultra-prototype_100937238.jpg (credit Image: Xiaomi)"),
-            imageCaption: "Image: Xiaomi — SU7 Ultra. I engineered the functional front air-duct system.",
             detail: {
               images: [],
               status: detailInPreparation,
@@ -467,7 +476,7 @@ export const site = {
           },
           {
             slug: "midea",
-            number: "12",
+            number: "9",
             title: "1㎡ Integrated Cooking Center — Midea",
             year: "2024",
             context: "Sponsored",
@@ -493,7 +502,7 @@ export const site = {
           },
           {
             slug: "parageta",
-            number: "13",
+            number: "14",
             title: "Parageta — Parametric Structural Optimization in Footwear",
             year: "2023",
             context: "Independent",
@@ -518,7 +527,7 @@ export const site = {
           },
           {
             slug: "agile-charge",
-            number: "14",
+            number: "13",
             title: "AGILE CHARGE — Mobile Charging Infrastructure",
             year: "2024",
             context: "Independent",
@@ -543,6 +552,28 @@ export const site = {
         ],
       },
     ] satisfies readonly WorkGroup[],
+    displayGroups: [
+      {
+        heading: "Projects at Tsinghua University",
+        description: "From Vehicle Engineering to Robotics.",
+        slugs: ["foot-interface", "pipeline"],
+      },
+      {
+        heading: "Projects at Xiaomi Auto",
+        description: "From PM to Vehicle Engineering.",
+        slugs: ["digital-cabin-2027", "skynomad", "yu7-hypervision", "su7-duct", "xiaomi-ai", "folding-wheel"],
+      },
+      {
+        heading: "Project at Midea Group",
+        description: "From HCI to PM.",
+        slugs: ["midea"],
+      },
+      {
+        heading: "Undergraduate Projects",
+        description: "A solid foundation in HCI.",
+        slugs: ["neuroware", "neuro-ui", "spatial-capstone", "agile-charge", "parageta", "seb"],
+      },
+    ] satisfies readonly WorkDisplayGroup[],
   },
   publications: {
     heading: "Publications",
@@ -686,9 +717,21 @@ export const site = {
   ],
 } as const;
 
-export const workItems: readonly WorkItem[] = site.work.groups.reduce<WorkItem[]>((items, group) => {
+const workCatalog: readonly WorkItem[] = site.work.groups.reduce<WorkItem[]>((items, group) => {
   items.push(...group.items);
   return items;
 }, []);
+
+export const workDisplayGroups: readonly WorkGroup[] = site.work.displayGroups.map((group) => ({
+  heading: group.heading,
+  description: group.description,
+  items: group.slugs.map((slug) => {
+    const item = workCatalog.find((candidate) => candidate.slug === slug);
+    if (!item) throw new Error(`Unknown work slug: ${slug}`);
+    return item;
+  }),
+}));
+
+export const workItems: readonly WorkItem[] = workDisplayGroups.flatMap((group) => group.items);
 
 export type SiteContent = typeof site;
