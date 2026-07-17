@@ -367,7 +367,8 @@ export const site = {
             year: "2026",
             context: "Research",
             description: "Teleoperation of OpenArm using a PICO 4 headset.",
-            image: workImage("openarm-pico4-teleoperation.webp", "OpenArm bimanual robot arms used for PICO 4 teleoperation", "https://docs.openarm.dev/1.0/"),
+            image: workImage("openarm-pico4-teleoperation.webp", "OpenArm bimanual robot arms used for PICO 4 teleoperation", "owner-supplied image: codex-clipboard-81d73711-240c-4ec3-9a09-549bd6c9e72e.png"),
+            coverTone: "dark",
             detail: {
               images: [],
               status: detailInPreparation,
@@ -380,7 +381,7 @@ export const site = {
             year: "2026",
             context: "Research",
             description: "SO-ARM 101 teleoperation and training for an autonomous grasping task.",
-            image: workImage("soarm101-grasp-training.webp", "SO-ARM 101 robot arm used for teleoperation and autonomous grasping training", "https://github.com/TheRobotStudio/SO-ARM100"),
+            image: workImage("soarm101-grasp-training.webp", "SO-ARM 101 robot arm used for teleoperation and autonomous grasping training", "owner-supplied image: codex-clipboard-0a3a7115-0d9a-463c-a116-d9792fbc6f31.png"),
             detail: {
               images: [],
               status: detailInPreparation,

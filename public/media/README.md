@@ -11,8 +11,8 @@ Place owner-supplied WebP files at the exact paths below. Keep every file at or 
 | `public/media/work/neuro-ui.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/neuro-ui` |
 | `public/media/work/spatial-capstone.webp` | 1120 × 630 | Owner supplied; no public page |
 | `public/media/work/robot-head-design.webp` | 1120 × 630 | Designed status placeholder: `In Progress` |
-| `public/media/work/openarm-pico4-teleoperation.webp` | 1120 × 630 | Official OpenArm documentation at `https://docs.openarm.dev/1.0/` |
-| `public/media/work/soarm101-grasp-training.webp` | 1120 × 630 | Official SO-ARM 101 repository at `https://github.com/TheRobotStudio/SO-ARM100` |
+| `public/media/work/openarm-pico4-teleoperation.webp` | 1120 × 630 | Owner-supplied `codex-clipboard-81d73711-240c-4ec3-9a09-549bd6c9e72e.png` |
+| `public/media/work/soarm101-grasp-training.webp` | 1120 × 630 | Owner-supplied `codex-clipboard-0a3a7115-0d9a-463c-a116-d9792fbc6f31.png` |
 | `public/media/work/xiaomi-ai.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/xiaomi-ai` |
 | `public/media/work/seb.webp` | 1120 × 630 | Owner-supplied export from old site `/untitled/seb` |
 | `public/media/work/skynomad.webp` | 1120 × 630 | `~/Desktop/personal/website/78ceda912861c5263ab8a3bb08188de4.jpg`; credit `Image: Xiaomi` |
